@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <!-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="description" content="">
+    <meta name="keywords" content="About Us, Our Team, Contact Us">
+    
+    {% block header %}
+    <title>About Us</title>
+    {% endblock %}
+    
+
+    <!-- <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <link rel="stylesheet" href="../../../media/nicepage.css" media="screen">
+    <link rel="stylesheet" href="../../../media/Главная.css" media="screen">
+    <meta name="generator" content="Nicepage 3.11.0, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"> -->
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col p-5 col-4">
+                <p class="text-justify">
+                <strong>{% trans "The Arctic Vegetation Archive (AVA)" %}</strong>
+                {% trans "is an international effort to assemble circumpolar Arctic vegetation plot data into a publically accessible web-based archive." %}&nbsp;&nbsp;<br>
+                {% trans "The goal of AVA is to unite and standardize vegetation data from the Arctic that will give researchers a unique opportunity to analyze vegetation at pan-arctic scale. The initiative is endorsed by" %}
+                <a href="https://www.caff.is/flora-cfg/arctic-vegetation-archive-ava" target="_blank">{% trans "the Conservation of Arctic Flora and Fauna of the Arctic Council" %}</a>
+                {% trans "and" %}
+                <a href="https://iasc.info/working-groups/terrestrial/activities" target="_blank">{% trans "the International Arctic Science Committee"%}</a>.
+
+                <a href="https://www.geobotany.uaf.edu/ava" class="u-active-none u-border-6 u-border-black u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1" target="_blank">{% trans "read more" %}</a>
+            </div>
+            <div class="col p-5 col-lg-4">
+                <p class="text-justify">
+                {% trans "At present, AVA consists of about 30’000 data plots, mostly from Alaska, Canada and Scandinavia, stored in Arctic regional databases. The Russian AVA section is under rapid development. In cooperation with data authors we are working on archiving and harmonizing information on the vegetation composition of the Russian Arctic. Our website presents the Russian AVA data and provides an overview of available data for downloading. Access to the AVA data is diverse: previously published data could be" %}
+                {% trans "downloaded directly and unpublished data – after a confirmation given by the dataset author (user agreement signing is needed)" %}&nbsp;&nbsp;<br>
+                <br>{% trans "A.N. Severtsov Institute of Ecology and Evolution RAS leads the effort. HSE Tikhonov Moscow Institute of Electronics and Mathematics provides technical assistance for the website. Project is supported by RFBR 18-04-01010 А." %}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <img src="{% static 'img/about/map.png' %}" class="card-img-top" alt="Map">
+            </div>
+        </div>
+        <div class="row p-5 justify-content-center bg-secondary-subtle">
+            <div class="col-12 p-3">
+                <h5 class="text-center">TEAM</h5>
+            </div>
+            <div class="col-2">
+                <div class="card m-2">
+                    <img src="{% static 'img/about/ermokhina.jpg' %}" class="card-img-top" alt="Ksenia Ermokhina">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans "Ksenia Ermokhina" %}</h5>
+                        <p class="card-text">{% trans "A.N. Severtsov Institute of Ecology and Evolution RAS, Moscow" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card m-2">
+                    <img src="{% static 'img/about/kurysheva.jpg' %}" class="card-img-top" alt="Maria Kurysheva">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans "Maria Kurysheva" %}</h5>
+                        <p class="card-text">{% trans "HSE Tikhonov Moscow Institute of Electronics and Mathematics, Moscow" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card m-2">
+                    <img src="{% static 'img/about/zemlianskii.jpg' %}" class="card-img-top" alt="Vitalii Zemlianskii">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans "Vitalii Zemlianskii" %}</h5>
+                        <p class="card-text">{% trans "University of Zurich, Department of Evolutionary Biology and Environmental Studies, Zurich" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card m-2">
+                    <img src="{% static 'img/about/korolev.jpg' %}" class="card-img-top" alt="Denis Korolev">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans "Denis Korolev" %}</h5>
+                        <p class="card-text">{% trans "HSE Tikhonov Moscow Institute of Electronics and Mathematics, Moscow" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h2 class="u-text u-text-1">{% trans "Contact Us" %}</h2>
+                <p class="u-text u-text-3">{% trans "Great vision without great people is irrelevant.<br>Let's work together."%}</p>
+            </div>
+            <div class="col-4 justify-content-center">
+                <form>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <!-- <label for="feedback-input-name" class="form-label">Name</label> -->
+                        <input type="text" class="form-control" id="feedback-input-name" placeholder="Name" aria-describedby="emailHelp">
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label for="feedback-input-email" class="form-label">Email address</label> -->
+                        <input type="email" class="form-control" id="feedback-input-email" placeholder="Email" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label for="feedback-input-message" class="form-label">Messagr</label> -->
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" rows="3"></textarea>
+                        <!-- <textarea type="email" class="form-control" id="feedback-input-message" placeholder="Message" rows="5" aria-describedby="message-help"> -->
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                    </div>
+                    
+                    
+                    
+                <!-- </form>
+                <form action="{% url 'about' %}" method="POST" class="u-block-46e8-10 u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="custom">
+                    {% csrf_token %}
+                    <div class="u-form-group u-form-name">
+                        <label for="name-f9f1" class="u-form-control-hidden u-label">{% trans "Name" %}</label>
+                        <input type="text" placeholder="Enter your Name" id="name-f9f1" value="{{ user.get_full_name }}"    name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                    </div>
+                    <div class="u-form-email u-form-group">
+                        <label for="email-f9f1" class="u-form-control-hidden u-label">{% trans "Email" %}</label>
+                        <input type="email" placeholder="Enter a valid email address" value="{{ user.email }}" id="email-f9f1" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <label for="message-f9f1" class="u-form-control-hidden u-label">{% trans "Message" %}</label>
+                        <textarea placeholder="Enter your message" rows="4" cols="50" id="message-f9f1" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <button type="submit" id="submit" class="btn btn-primary mt-2" >{% trans "Submit" %}</button>
+                    </div>
+                    {% else %}
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <button type="submit" disabled id="submit2" class="btn btn-primary mt-2" >{% trans "Submit" %}</button>
+                    </div>
+                    {% endif %}
+                </form> -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="text-center">
+        <p class="u-small-text u-text u-text-variant u-text-1">{% trans "Designed for" %}&nbsp;<a href="http://www.ras.ru/" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">{% trans "The Russian Academy of Sciences" %}</a>&nbsp;{% trans "by" %} <a href="https://cabinet.miem.hse.ru/#/project/1" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-2">{% trans "MIEM" %}</a><br>{% trans "Supported by" %} RFBR 18-04-01010
+        </p>
+    </footer>
+</body>
+</html>
+
+{% endblock content %}
