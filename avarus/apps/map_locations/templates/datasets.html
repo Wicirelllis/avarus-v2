@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="p-3 outer-container">
+    <div class="card">
+        <div class="card-header">
+            Datasets
+        </div>
+        <div class="card-body">
+            {% if datasets %}
+                <ul class="list-group list-group-flush">
+                    {% for dataset in datasets %}
+                        <li class="list-group-item">
+                            <a href="{{ dataset.get_absolute_url }}">{{ dataset }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

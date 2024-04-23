@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block header %}
+<title>{{ publication }}</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center">
+            {{ publication }}
+        </h3>
+        <div class="card-body p-4">
+            <div class="card-text">
+                {% if publication.DOI %}
+                    <p><strong>DOI:</strong> {{ publication.DOI }}</p>
+                {% endif %}
+            </div>
+            <div class="card-text">
+                {% if publication.URL %}
+                    <strong>URL:</strong> <a href="{{ publication.URL }}">{{ publication.URL }}</a>
+                {% endif %}
+            </div>
+            <div class="card-text">
+                {% if publication.authors %}
+                    <strong>Authors:</strong>
+                    {% for a in publication.authors.all %}
+                        <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="card-text">
+                <p class="card-text px-4 py-3">{{ publication.abstract | linebreaksbr  }}</p>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-header">
+                Related datasets
+            </h5>
+            <ul class="list-group list-group-flush">
+                {% for d in publication.datasets.all %}
+                    <li class="list-group-item">
+                        <a href="{{ d.get_absolute_url }}">{{ d }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

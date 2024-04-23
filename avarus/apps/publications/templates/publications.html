@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block header %}
+<title>Publications</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center">
+            Publications
+        </h3>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for publication in publications %}
+                    <li class="list-group-item">
+                        <a href="{{ publication.get_absolute_url }}">{{ publication }}</a>
+                        &mdash;
+                        {% for a in publication.authors.all %}
+                            <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

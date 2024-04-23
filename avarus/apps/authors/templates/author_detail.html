@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center text-capitalize">
+            {{ author }}
+        </h3>
+        <div class="card-body">
+            <h5 class="card-header">
+                Datasets
+            </h5>
+            <ul class="list-group list-group-flush">
+                {% for d in author.datasets.all %}
+                    <li class="list-group-item">
+                        <a href="{{ d.get_absolute_url }}">{{ d }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-header">
+                Publications
+            </h5>
+            <ul class="list-group list-group-flush">
+                {% for p in author.publications.all %}
+                    <li class="list-group-item">
+                        <a href="{{ p.get_absolute_url }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

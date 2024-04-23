@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block header %}
+<title>{{ object }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center text-uppercase">
+            {{ dataset }}
+        </h3>
+        <div class="card-body">
+            <div class="container text-center m-4 mx-auto">
+                <div class="row text-start">
+                    <div class="col-8">
+                        <img src="/media/{{ dataset.image.name }}" class="img-fluid p-2" alt="Image">
+                    </div>
+                    <div class="col-4">
+                        <h4 class="card-header text-center">
+                            Location description
+                        </h4>
+                        <div class="card-body">
+                            <p><strong>Authors:</strong>
+                                {% for a in dataset.authors.all %}
+                                    <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            <p><strong>Year:</strong> {{ dataset.year|default_if_none:"&mdash;" }}</p>
+                            <p><strong>Region:</strong> {{ dataset.region|default_if_none:"&mdash;" }}</p>
+                            <p><strong>Number of plots:</strong> {{ dataset.n_plots|default_if_none:"&mdash;" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <ul class="nav nav-tabs mx-auto justify-content-center flex-nowrap" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-data-tab" data-bs-toggle="tab" data-bs-target="#general-data" type="button" role="tab" aria-controls="general-data" aria-selected="true">General data</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="relief-tab" data-bs-toggle="tab" data-bs-target="#relief" type="button" role="tab" aria-controls="relief" aria-selected="false">Relief</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="soil-tab" data-bs-toggle="tab" data-bs-target="#soil" type="button" role="tab" aria-controls="soil" aria-selected="false">Soil texture</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="ecotope-tab" data-bs-toggle="tab" data-bs-target="#ecotope" type="button" role="tab" aria-controls="ecotope" aria-selected="false">Ecotope data</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="phytocoenosis-tab" data-bs-toggle="tab" data-bs-target="#phytocoenosis" type="button" role="tab" aria-controls="phytocoenosis" aria-selected="false">Phytocoenosis data</button>
+                    </li>
+    
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disturbance-tab" data-bs-toggle="tab" data-bs-target="#disturbance" type="button" role="tab" aria-controls="disturbance" aria-selected="false">Disturbance</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pubications-tab" data-bs-toggle="tab" data-bs-target="#pubications" type="button" role="tab" aria-controls="pubications" aria-selected="false">Pubications</button>
+                    </li>
+                </ul>
+      
+                <div class="tab-content">
+                    <div class="tab-pane active w-75 mx-auto" id="general-data" role="tabpanel" aria-labelledby="general-data-tab">
+                        {% include "general_data.html" %}
+                    </div>
+                    <div class="tab-pane w-50 mx-auto" id="relief" role="tabpanel" aria-labelledby="relief-tab">
+                        <canvas id="chart-relief"></canvas>
+                        {{ dataset.position|json_script:"chart-relief-data" }}
+                        <script type="text/javascript" src="{% static 'charts/relief.js' %}"></script>
+                    </div>
+                    <div class="tab-pane w-50 mx-auto" id="soil" role="tabpanel" aria-labelledby="soil-tab">
+                        <canvas id="chart-soil"></canvas>
+                        {{ dataset.soil_text|json_script:"chart-soil-data" }}
+                        <script type="text/javascript" src="{% static 'charts/soil.js' %}"></script>
+                    </div>
+                    <div class="tab-pane w-50 mx-auto" id="ecotope" role="tabpanel" aria-labelledby="ecotope-tab">
+                        ecotope
+                    </div>
+                    <div class="tab-pane w-50 mx-auto" id="phytocoenosis" role="tabpanel" aria-labelledby="phytocoenosis-tab">
+                        phytocoenosis
+                    </div>
+                    <div class="tab-pane w-50 mx-auto" id="disturbance" role="tabpanel" aria-labelledby="disturbance-tab">
+                        <canvas id="chart-disturbace"></canvas>
+                        {{ dataset.disturban|json_script:"chart-disturbance-data" }}
+                        <script type="text/javascript" src="{% static 'charts/disturbance.js' %}"></script>
+                    </div>
+                    <div class="tab-pane w-75 mx-auto" id="pubications" role="tabpanel" aria-labelledby="pubications-tab">
+                        <ul class="list-group list-group-flush">
+                            {% for p in dataset.publications.all %}
+                                <li class="list-group-item">
+                                    <a href="{{ p.get_absolute_url }}">{{ p }}</a>
+                                    &mdash;
+                                    {% for a in p.authors.all %}
+                                        <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

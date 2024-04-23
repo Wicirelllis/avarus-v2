@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block header %}
+<title>{{ object }}</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center">
+            {{ object }}
+        </h3>
+        <div class="card-body p-4">
+            {% if object.url %}
+                <a href="{{ object.url }}">
+                    {% if object.url_text %}
+                        {{ object.url_text }}
+                    {% else %}
+                        {{ object.url }}
+                    {% endif %}
+                </a>
+                <br/><br/>
+            {% endif %}
+            
+            {{ object.long_description }}
+    </div>
+</div>
+{% endblock content %}
