@@ -25,7 +25,11 @@
         <div class="col-8 p-2">{{ dataset.coverscale|default_if_none:"&mdash;" }}</div>
 
         <div class="col-4 p-2">Key site coordinates</div>
-        <div class="col-8 p-2">{{ dataset.coordinates|default_if_none:"&mdash;" }}</div>
+        <div class="col-8 p-2">
+            {% if dataset.latitude and dataset.longitude %}
+                {{ dataset.latitude }}, {{ dataset.longitude}}
+            {% endif %}
+        </div>
 
         <div class="col-4 p-2">Plots geotagged</div>
         <div class="col-8 p-2">{{ dataset.geotagged|default_if_none:"&mdash;" }}</div>

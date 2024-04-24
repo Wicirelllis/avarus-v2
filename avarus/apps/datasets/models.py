@@ -28,6 +28,10 @@ class Dataset(models.Model):
     year = models.CharField(max_length=200, blank=True, null=True, help_text='Year of creation')
     n_plots = models.CharField(max_length=200, blank=True, null=True, help_text='Number of plots')
     coverscale = models.CharField(max_length=200, blank=True, null=True, help_text='')
+
+    longitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=7, decimal_places=5, blank=True, null=True)
+
     coordinates = models.CharField(max_length=200, blank=True, null=True, help_text='Key site coordinates')
     geotagged = models.CharField(max_length=200, blank=True, null=True, help_text='')
     region = models.CharField(max_length=200, blank=True, null=True, help_text='')
@@ -76,7 +80,9 @@ class Dataset(models.Model):
             'liverworts',
             'liches',
             'vascular',
-            'cryptogam'
+            'cryptogam',
+            'latitude',
+            'longitude',
         ]
         ParseDataset(self).fill_fields(fields)
         super(Dataset, self).save(*args, **kwargs)

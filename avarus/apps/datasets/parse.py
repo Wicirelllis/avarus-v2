@@ -325,3 +325,11 @@ class ParseDataset:
         }
         val_counts = self._get_val_counts('CRYP_QUAL')
         return str(_translate(val_counts, table))
+
+    def _get_latitude(self):
+        data = self.df['LATITUDE'].astype(float)
+        return (np.max(data) + np.min(data)) / 2.
+
+    def _get_longitude(self):
+        data = self.df['LONGITUDE'].astype(float)
+        return (np.max(data) + np.min(data)) / 2.
