@@ -1,18 +1,17 @@
 (function () {
-    const model_data = JSON.parse(JSON.parse(document.getElementById('chart-disturbance-data').textContent));
+    const model_data_id = document.currentScript.getAttribute('model_data_id');
+    const model_data = JSON.parse(document.getElementById(model_data_id).textContent);
+    const canvas_id = document.currentScript.getAttribute('canvas_id');
+    const chart_type = document.currentScript.getAttribute('chart_type');
 
-    var ctx = document.getElementById('chart-disturbace');
+    var ctx = document.getElementById(canvas_id);
     var myChart = new Chart(ctx, {
-        type: 'pie',
+        type: chart_type,
         data: {
-            labels: ['disturbed', 'natural (no disturbance)', 'no data'],
+            labels: model_data['labels'],
             datasets: [{
-                label: 'Distrubance data',
-                data: [
-                    model_data['DIS'] ?? 0,
-                    model_data['NAT'] ?? 0,
-                    model_data['NONE'] ?? 0,
-                ],
+                label: model_data['title'],
+                data: model_data['data'],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -39,5 +38,7 @@
                 }
             }
         }
-    });
+    });    
 })();
+
+
