@@ -29,8 +29,8 @@ class Dataset(models.Model):
     n_plots = models.CharField(max_length=200, blank=True, null=True, help_text='Number of plots')
     coverscale = models.CharField(max_length=200, blank=True, null=True, help_text='')
 
-    longitude = models.DecimalField(max_digits=8, decimal_places=5, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=7, decimal_places=5, blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
 
     coordinates = models.CharField(max_length=200, blank=True, null=True, help_text='Key site coordinates')
     geotagged = models.CharField(max_length=200, blank=True, null=True, help_text='')

@@ -27,7 +27,7 @@
         <div class="col-4 p-2">Key site coordinates</div>
         <div class="col-8 p-2">
             {% if dataset.latitude and dataset.longitude %}
-                {{ dataset.latitude }}, {{ dataset.longitude}}
+                {{ dataset.latitude|floatformat:5 }}, {{ dataset.longitude|floatformat:5 }}
             {% endif %}
         </div>
 
