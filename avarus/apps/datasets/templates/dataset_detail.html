@@ -70,23 +70,32 @@
                     <div class="tab-pane w-50 mx-auto" id="relief" role="tabpanel" aria-labelledby="relief-tab">
                         <canvas id="chart-relief"></canvas>
                         {{ dataset.position|json_script:"chart-relief-data" }}
-                        <script type="text/javascript" src="{% static 'charts/relief.js' %}"></script>
+                        <!-- <script type="text/javascript" src="{% static 'charts/relief.js' %}"></script> -->
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-relief-data" canvas_id="chart-relief" chart_type="pie"></script>
                     </div>
                     <div class="tab-pane w-50 mx-auto" id="soil" role="tabpanel" aria-labelledby="soil-tab">
                         <canvas id="chart-soil"></canvas>
                         {{ dataset.soil_text|json_script:"chart-soil-data" }}
-                        <script type="text/javascript" src="{% static 'charts/soil.js' %}"></script>
+                        <!-- <script type="text/javascript" src="{% static 'charts/soil.js' %}"></script> -->
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-soil-data" canvas_id="chart-soil" chart_type="pie"></script>
                     </div>
                     <div class="tab-pane w-50 mx-auto" id="ecotope" role="tabpanel" aria-labelledby="ecotope-tab">
-                        ecotope
+                        <canvas id="chart-ecotope"></canvas>
+                        {{ dataset.ecotope|json_script:"chart-ecotope-data" }}
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-ecotope-data" canvas_id="chart-ecotope" chart_type="bar"></script>
                     </div>
                     <div class="tab-pane w-50 mx-auto" id="phytocoenosis" role="tabpanel" aria-labelledby="phytocoenosis-tab">
-                        phytocoenosis
+                        {{ dataset.phytocoenosis|json_script:"chart-phytocoenosis-data" }}
+                        <canvas id="chart-phytocoenosis"></canvas>
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-phytocoenosis-data" canvas_id="chart-phytocoenosis" chart_type="bar"></script>
+                        {{ dataset.phytocoenosis_cover|json_script:"chart-phytocoenosis-cover-data" }}
+                        <canvas id="chart-phytocoenosis-cover"></canvas>
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-phytocoenosis-cover-data" canvas_id="chart-phytocoenosis-cover" chart_type="bar"></script>
                     </div>
                     <div class="tab-pane w-50 mx-auto" id="disturbance" role="tabpanel" aria-labelledby="disturbance-tab">
                         <canvas id="chart-disturbace"></canvas>
                         {{ dataset.disturban|json_script:"chart-disturbance-data" }}
-                        <script type="text/javascript" src="{% static 'charts/disturbance.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'charts/chart.js' %}" model_data_id="chart-disturbance-data" canvas_id="chart-disturbace" chart_type="pie"></script>
                     </div>
                     <div class="tab-pane w-75 mx-auto" id="pubications" role="tabpanel" aria-labelledby="pubications-tab">
                         <ul class="list-group list-group-flush">

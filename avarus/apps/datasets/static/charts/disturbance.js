@@ -9,7 +9,7 @@
             datasets: [{
                 label: 'Distrubance data',
                 data: [
-                    model_data['DIST'] ?? 0,
+                    model_data['DIS'] ?? 0,
                     model_data['NAT'] ?? 0,
                     model_data['NONE'] ?? 0,
                 ],
