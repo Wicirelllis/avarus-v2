@@ -11,7 +11,7 @@ def HomeView(request):
         placemark = {
             'center': [loc.dataset.latitude, loc.dataset.longitude],
             'name': f'{loc.name}',
-            'ContentHeader': [f'<a href="{loc.dataset.get_absolute_url()}">{loc.name}</a><br>{', '.join(str(a) for a in loc.authors.all())}<hr>'],
+            'ContentHeader': [f'<a href="{loc.dataset.get_absolute_url()}">{loc.name}</a><br>{', '.join(str(a) for a in loc.dataset.authors.all())}<hr>'],
             'ContentBody': [f'<img src="/media/{loc.dataset.image.name}" class="img-fluid p-2" alt="Image">'],
             'ContentFooter': [f'{loc.dataset.n_plots} plots'],
             'hint': [f'{loc.name}'],

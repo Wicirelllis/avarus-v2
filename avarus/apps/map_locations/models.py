@@ -6,7 +6,7 @@ from django.db import models
 class MapLocation(models.Model):
     ''' Location that displayed on map. Each location belong to one dataset, but in the future it is possible that one dataset will have multiple locations '''
     name = models.CharField('Location name', max_length=120, null=True)
-    dataset = models.ForeignKey(Dataset, blank=True, on_delete=models.CASCADE)
+    dataset = models.ForeignKey(Dataset, related_name='map_locations', on_delete=models.CASCADE)
 
 
     def __str__(self):
