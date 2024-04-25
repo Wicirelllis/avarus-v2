@@ -8,5 +8,5 @@ from django.dispatch import receiver
 def create_map_location(sender, instance, created, **kwargs):
     ''' Create corresponding map location on dataset creation '''
     if created:
-        loc = MapLocation.objects.create(name=instance.title, dataset=instance)
+        MapLocation.objects.create(name=instance.title, dataset=instance)
         # TOOO authors are not set bc it's m2m field and post_save don't track them
