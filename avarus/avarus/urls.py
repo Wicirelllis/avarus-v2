@@ -28,20 +28,24 @@ from django.urls import re_path
 from django.views.i18n import JavaScriptCatalog
 from django.conf import settings
 from avarus import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += [
+
+urlpatterns += i18n_patterns(
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', views.HomeView, name='home'),
     path('about/', views.AboutView, name='about'),
     path('publications/', include('apps.publications.urls')),
     path('authors/', include('apps.authors.urls')),
     path('datasets/', include('apps.datasets.urls')),
     path('related-projects/', include('apps.related_projects.urls')),
-]
-
+    path('', include('apps.profiles.urls')),
+    prefix_default_language=False
+)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

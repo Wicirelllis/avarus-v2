@@ -14,10 +14,6 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    {% block header %}
-    <title> AVA</title>
-    {% endblock %}
-
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
@@ -30,12 +26,16 @@
     <link rel="stylesheet" type="text/css" href="../../media/styles.css">
     <link rel="stylesheet" type="text/css" href="../../media/index.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {% block head %}
+        <title>AVA</title>
+    {% endblock head %}
 </head>
 <body>
 <header class="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static '/img/index.jpg' %}" alt="AVA" width="60" height="60" class="d-inline-block align-text-middle m-2">
                 Russian Arctic Vegetation Archive
             </a>
@@ -59,13 +59,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'related-projects' %}">Related projects</a>
                     </li>
-
                     {% if user.is_authenticated %}
+                        <li class="nav-item">
+                                <a class="nav-link" href="#">Statistics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Statistics</a>
-                    </li>
-                    <div class="nav-item">
-                        <form class="nav-panel__form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
                             <select class="nav-panel__language" name="language" onchange="this.form.submit()">
                                 {% get_current_language as LANGUAGE_CODE %}
                                 {% get_available_languages as LANGUAGES %}
@@ -77,137 +85,11 @@
                                 {% endfor %}
                             </select>
                         </form>
-                    </div>
-                    {% else %}
-                    <div class="nav-item">
-                        <a class="nav-link" href="#">Sing in</a>
-                    </div>
-                    <div class="nav-item">
-                        <form class="nav-panel__form" action="" method="post">{% csrf_token %}
-                            <select class="nav-panel__language" name="language" onchange="this.form.submit()">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                <option class="nav-panel__language-item" value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                                    {{ language.code }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
-                    {% endif %}
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
-    <!-- <div class="header-main">
-        <div class="header-main__container">
-            <div class="header-main__logo">
-                <div class="logo">
-                    <a class="logo__link" href="/">
-                        <img class="logo__image" src="{% static 'img/index.jpg' %}" width="60px" height="60px">
-                    </a>
-                    <h3 class="logo__name">Russian Arctic Vegetation Archive</h3>
-                </div>
-            </div>
-            <div class="header-main__nav-panel">
-                <div class="nav-panel">
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="">{% translate "Main" %}</a>
-                    </div>
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="">{% translate "About Us" %}</a>
-                    </div>
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="">{% translate "Instructions" %}</a>
-                    </div>
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="{% url 'publications' %}">{% translate "Publications" %}</a>
-                    </div>
-                    {% if user.is_authenticated %}
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="{% url 'statistics_view' %}">{% translate "Statistics" %}</a>
-                    </div>
-                    <div class="nav-panel__item">
-                        <form class="nav-panel__form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                            <select class="nav-panel__language" name="language" onchange="this.form.submit()">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                <option class="nav-panel__language-item" value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
-                                        selected{% endif %}>
-                                    {{ language.code }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
-                    {% else %}
-                    <div class="nav-panel__item">
-                        <a class="nav-panel__link" href="">{% translate "Sign In" %}</a>
-                    </div>
-                    <div class="nav-panel__item">
-                        <form class="nav-panel__form" action="" method="post">{% csrf_token %}
-                            <select class="nav-panel__language" name="language" onchange="this.form.submit()">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                <option class="nav-panel__language-item" value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
-                                        selected{% endif %}>
-                                    {{ language.code }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="header-main__mobile-menu">
-                <div class="mobile-menu">
-                    <a href="" class="menu-btn">
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-            {% if user.is_authenticated %}
-            <div class="header-main__profile">
-                <div class="profile">
-                    <div class="profile__user-name">
-                        <a class="profile__link" style="text-decoration: none" href="{% url 'index' %}">
-                            <p class="profile__text">{{ user.get_username }}</p>
-                        </a>
-                    </div>
-                    <div class="profile__avatar">
-                        <a class="profile__link" href="{% url 'index' %}">
-                            {% if user.profile.photo %}
-                            <img class="profile__avatar round" src="/media/{{ user.profile.photo }}" style="object-fit: cover; height:40px; width:40px" alt=""/>
-                            {% else %} <img class="round" src="https://2004000.ru/common/i/empty_staff.png" style="object-fit: cover; height:25px; width:25px" alt=""/> {% endif %}
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header-main__profile-mobile header-main__profile-mobile_hidden">
-                <div class="profile_mobile">
-                    <div class="profile-mobile__avatar">
-                        <a class="profile-mobile__link" href="{% url 'index' %}">
-                            <svg class="profile-mobile__image" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0576 13.229C7.98278 13.229 4.61188 16.2879 4.11951 20.231C4.05108 20.779 4.50536 21.229 5.05765 21.229C5.60993 21.229 6.04891 20.7779 6.14028 20.2332C6.61603 17.3972 9.08858 15.229 12.0576 15.229C15.0267 15.229 17.4993 17.3972 17.975 20.2332C18.0664 20.7779 18.5054 21.229 19.0576 21.229C19.6099 21.229 20.0642 20.779 19.9958 20.231C19.5034 16.2879 16.1325 13.229 12.0576 13.229Z" fill="#34AADD"/>
-                                <path d="M12.0576 11.229C14.2636 11.229 16.0576 9.435 16.0576 7.229C16.0576 5.023 14.2636 3.229 12.0576 3.229C9.85162 3.229 8.05762 5.023 8.05762 7.229C8.05762 9.435 9.85162 11.229 12.0576 11.229" stroke="#34AADD" stroke-width="2"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-    </div> -->
 </header>
 
 {% block content %}{% endblock %}

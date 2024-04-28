@@ -86,3 +86,7 @@ class Dataset(models.Model):
 
     class Meta:
         verbose_name = 'Dataset'
+
+
+class DatasetRequest(models.Model):
+    ...
