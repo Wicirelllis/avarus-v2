@@ -7,11 +7,11 @@ from .models import Dataset
 
 def DatasetsView(request):
     datasets = Dataset.objects.all()
-    return render(request, 'datasets.html', {'datasets': datasets})
+    return render(request, 'datasets/datasets.html', {'datasets': datasets})
 
 class DatasetDetailView(generic.DetailView):
     model = Dataset
-    template_name = 'dataset_detail.html'
+    template_name = 'datasets/dataset_detail.html'
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)

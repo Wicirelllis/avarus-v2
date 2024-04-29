@@ -5,8 +5,8 @@ from .models import Author
 
 def AuthorsView(request):
     authors = Author.objects.all()
-    return render(request, 'authors.html', {'authors': authors})
+    return render(request, 'authors/authors.html', {'authors': authors})
 
 class AuthorDetailView(generic.DetailView):
     model = Author
-    template_name = 'author_detail.html'
+    template_name = 'authors/author_detail.html'
