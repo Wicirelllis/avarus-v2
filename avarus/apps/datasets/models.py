@@ -3,6 +3,7 @@ from apps.datasets.parse import ParseDataset
 from apps.publications.models import Publication
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 LOAN_STATUS = (
     ('pu', 'Public'),
@@ -17,6 +18,7 @@ class Dataset(models.Model):
     env = models.FileField(upload_to='datasets/env/', blank=True)
     spp = models.FileField(upload_to='datasets/spp/', blank=True)
     image = models.ImageField(upload_to='datasets/img/', blank=True)
+    download_url = models.URLField('Download link', blank=True)
 
     authors = models.ManyToManyField(Author, related_name='datasets', blank=True)
     publications = models.ManyToManyField(Publication, related_name='datasets', blank=True)
@@ -26,6 +28,7 @@ class Dataset(models.Model):
     permafrost_data = models.CharField(max_length=200, blank=True, help_text='')
     additional_data = models.TextField(blank=True, help_text='Any additional info related to dataset.')
 
+    available_to = models.ManyToManyField(User, related_name='available_datasets', blank=True)
 
     year = models.CharField(max_length=200, blank=True, help_text='Year of creation')
     n_plots = models.CharField(max_length=200, blank=True, help_text='Number of plots')
@@ -88,5 +91,25 @@ class Dataset(models.Model):
         verbose_name = 'Dataset'
 
 
+ACCESS_STATUS = (
+    ('g', 'Granted'),
+    ('r', 'In review'),
+    ('d', 'Denied')
+)
+
 class DatasetRequest(models.Model):
-    ...
+    user = models.ForeignKey(User, on_delete=models.PROTECT, help_text='User that requested access')
+    dataset = models.ForeignKey(Dataset, on_delete=models.PROTECT)
+    name = models.CharField('Name', max_length=120)
+    organization = models.CharField('Organization', max_length=120, null=True)
+    position = models.CharField('Position', max_length=120, null=True)
+    email = models.EmailField('Email', max_length=120, null=True, blank=True)
+    purpose = models.TextField('Purpose', null=True)
+    status = models.CharField(max_length=1, choices=ACCESS_STATUS, blank=True, default='r')
+
+
+    class Meta:
+        verbose_name = 'Dataset access request'
+
+    def __str__(self):
+        return str(self.dataset.title)

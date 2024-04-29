@@ -2,10 +2,15 @@
 
 {% load i18n %}
 {% load static %}
+{% load django_bootstrap5 %}
 
-{% block header %}
-<title>{{ object }}</title>
-{% endblock %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<title>AVA | {{ object }}</title>
+{% endblock head %}
 
 {% block content %}
 <div class="p-3 outer-container">
@@ -32,6 +37,60 @@
                             <p><strong>Year:</strong> {{ dataset.year|default_if_none:"&mdash;" }}</p>
                             <p><strong>Region:</strong> {{ dataset.region|default_if_none:"&mdash;" }}</p>
                             <p><strong>Number of plots:</strong> {{ dataset.n_plots|default_if_none:"&mdash;" }}</p>
+                        </div>
+                        <div class="card-footer">
+                            {% if not user.is_authenticated %}
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+                                    Request
+                                </button>
+                                <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="requestModalLabel">Request dataset</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="d-flex justify-content-center">
+                                                    Please &nbsp;<a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log In</a>
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    Don't have an account? &nbsp;<a href="{% url 'register' %}?next={{ request.get_full_path|urlencode }}">Sign Up</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif user in dataset.available_to.all %}
+                                {% if dataset.download_url %}
+                                    <a class="btn btn-primary" href="{{ dataset.download_url }}" target="_blank">Download</a>
+                                {% else %}
+                                    Dataset is currently unavailable.
+                                {% endif %}
+                            {% else %}
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+                                    Request
+                                </button>
+                                <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="requestModalLabel">Request dataset</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{% url 'dataset-request-form' %}" method="post">
+                                                    {% csrf_token %}
+                                                    {% bootstrap_form request_form %}
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Dataset
+from .models import Dataset, DatasetRequest
 
 
 class DatasetAdmin(admin.ModelAdmin):
@@ -14,6 +14,7 @@ class DatasetAdmin(admin.ModelAdmin):
                     'summary',
                     'env',
                     'spp',
+                    'download_url',
                     'image',
                     'authors',
                     'publications',
@@ -21,6 +22,7 @@ class DatasetAdmin(admin.ModelAdmin):
                     'permafrost_type',
                     'permafrost_data',
                     'additional_data',
+                    'available_to',
                 ],
             },
         ),
@@ -52,3 +54,4 @@ class DatasetAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Dataset, DatasetAdmin)
+admin.site.register(DatasetRequest)

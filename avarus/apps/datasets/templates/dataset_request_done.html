@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<title>AVA | Dataset request complete</title>
+{% endblock head %}
+
+{% block content %}
+<div class="p-3 outer-container">
+    <div class="card">
+        <div class="card-body">
+            Your request has been sent. We will contact you soon.
+        </div>
+    </div>
+</div>
+{% endblock content %}

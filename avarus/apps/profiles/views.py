@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 from django.views import generic
 from django.contrib import messages
 from .forms import RegisterForm, UserEditForm, ProfileEditForm
-
+from apps.datasets.models import Dataset, DatasetRequest
 
 def RegisterView(request):
     if request.user.is_authenticated:
@@ -29,9 +29,11 @@ def ProfileView(request):
     if request.method == 'POST' and user_form.is_valid() and profile_form.is_valid():
         user_form.save()
         profile_form.save()
-
+    q = DatasetRequest.objects.filter(status='g').values_list('dataset', flat=True).distinct(),
     ctx = {
         'profile_form': profile_form,
         'user_form': user_form,
+        'available_datasets': Dataset.objects.filter(status='pu') | Dataset.objects.filter(),
+        'requested_datasets': DatasetRequest.objects.filter(status='g'),
     }
     return render(request, 'registration/profile.html', ctx)
