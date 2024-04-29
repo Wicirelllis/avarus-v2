@@ -29,11 +29,10 @@ def ProfileView(request):
     if request.method == 'POST' and user_form.is_valid() and profile_form.is_valid():
         user_form.save()
         profile_form.save()
-    q = DatasetRequest.objects.filter(status='g').values_list('dataset', flat=True).distinct(),
     ctx = {
         'profile_form': profile_form,
         'user_form': user_form,
-        'available_datasets': Dataset.objects.filter(status='pu') | Dataset.objects.filter(),
-        'requested_datasets': DatasetRequest.objects.filter(status='g'),
+        'available_datasets': Dataset.objects.filter(status='pu').distinct() | Dataset.objects.filter(available_to=request.user).distinct(),
+        'requested_datasets': DatasetRequest.objects.all(),
     }
     return render(request, 'registration/profile.html', ctx)
