@@ -5,5 +5,3 @@ data/
 .env
 
 migrations/
-
-avarus/avarus/settings.py
