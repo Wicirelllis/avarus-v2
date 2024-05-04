@@ -23,3 +23,6 @@ def HomeView(request):
 
 def AboutView(request):
     return render(request, 'about.html')
+
+def InstructionsView(request):
+    return render(request, 'instructions.html')

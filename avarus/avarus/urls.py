@@ -33,6 +33,7 @@ urlpatterns += i18n_patterns(
     path('i18n/', include('django.conf.urls.i18n')),
     path('', views.HomeView, name='home'),
     path('about/', views.AboutView, name='about'),
+    path('instructions/', views.InstructionsView, name='instructions'),
     path('publications/', include('apps.publications.urls')),
     path('authors/', include('apps.authors.urls')),
     path('datasets/', include('apps.datasets.urls')),
