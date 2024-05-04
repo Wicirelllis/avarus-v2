@@ -1,6 +1,9 @@
 __pycache__/
 *.py[cod]
 
+data/
+.env
+
 migrations/
 
 avarus/avarus/settings.py
