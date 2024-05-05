@@ -1,10 +1,16 @@
 ''' This module contains auxiliary functions that parse xlsx dataset file to extract data '''
+from contextlib import suppress
+
 import dateutil
 import numpy as np
 import pandas as pd
 
 
-def _calc_completeness(df: pd.DataFrame):
+def _get_val_counts(df: pd.DataFrame, field: str | list[str]) -> dict:
+    ''' Return a dict containing counts of unique values '''
+    return df[field].fillna('NONE').value_counts(dropna=False).to_dict()
+
+def _calc_completeness(df: pd.DataFrame) -> dict:
     ''' Calculate copleteness (percent of cell with data) for each column of dataframe '''
     return (100 * df.notna().sum() / df.shape[0]).round().astype(int).to_dict()
 
@@ -19,18 +25,18 @@ def _translate(data: list | dict, table: dict) -> list | dict:
 class ParseDataset:
     def __init__(self, dataset) -> None:
         self.dataset = dataset
-        self.df: pd.DataFrame = self._read_excel()
+        self.df: pd.DataFrame = self._read_env_excel()
         self._fix_header()
 
     def fill_fields(self, fields: list[str]):
         ''' Fill dataset's attributes '''
         for field in fields:
-            # if not getattr(self.dataset, field):
-            if True:
-                setattr(self.dataset, field, getattr(self, f'_get_{field}')())
+            if not getattr(self.dataset, field):
+                with suppress(Exception):
+                    setattr(self.dataset, field, getattr(self, f'_get_{field}')())
 
-    def _read_excel(self) -> pd.DataFrame:
-        ''' Read an excel file into a pandas dataframe '''
+    def _read_env_excel(self) -> pd.DataFrame:
+        ''' Read an env excel file into a pandas dataframe '''
         path = self.dataset.env.path
         df = pd.read_excel(path, header=None, dtype={'REGION': str})
         for row_idx in range(df.shape[0]):
@@ -47,11 +53,7 @@ class ParseDataset:
         }
         self.df.rename(str.strip, axis='columns', inplace=True)
         self.df.rename(table, axis='columns', inplace=True)
-    
-    def _get_val_counts(self, field: str | list[str]):
-        ''' Return a dict containing counts of unique values '''
-        return self.df[field].fillna('NONE').value_counts(dropna=False).to_dict()
-    
+
     # chart data fields
     def _get_disturban(self):
         data = self.df['DISTURBAN'].fillna('NONE').value_counts(dropna=False).to_dict()
@@ -67,8 +69,7 @@ class ParseDataset:
         }
 
     def _get_position(self):
-        data = self.df['POSITION'].fillna('NONE').value_counts(dropna=False).to_dict()
-        data = self._get_val_counts('POSITION')
+        data = _get_val_counts(self.df, 'POSITION')
         table = {
             'EL_PLN': 'Flat elevated plain',
             'CRST': 'Hill crest',
@@ -236,7 +237,7 @@ class ParseDataset:
             '98': 'Numbers (<65025)',
             '99': 'Numbers (<24000)',
         }
-        val_counts = self._get_val_counts('COVERSCALE')
+        val_counts = _get_val_counts(self.df, 'COVERSCALE')
         return ','.join(_translate(val_counts, table).keys())
 
     def _get_region(self):
@@ -269,11 +270,11 @@ class ParseDataset:
             '025': 'Canadian Arctic Archipelago',
             '026': 'Mainland Northwest Territories, Canada',
         }
-        val_counts = self._get_val_counts('REGION')
+        val_counts = _get_val_counts(self.df, 'REGION')
         return ','.join(_translate(val_counts, table).keys())
 
     def _get_location(self):
-        val_counts = self._get_val_counts('LOCATION')
+        val_counts = _get_val_counts(self.df, 'LOCATION')
         return ','.join(val_counts.keys())
     
     def _get_subzone(self):
@@ -287,19 +288,19 @@ class ParseDataset:
             'FT': 'Forest-Tundra Transition',
             'BO': 'Boreal',
         }
-        val_counts = self._get_val_counts('SUBZONE')
+        val_counts = _get_val_counts(self.df, 'SUBZONE')
         return ','.join(_translate(val_counts, table).keys())
 
     def _get_mosses(self):
-        val_counts = self._get_val_counts('MOSS_IDENT')
+        val_counts = _get_val_counts(self.df, 'MOSS_IDENT')
         return str(val_counts)
 
     def _get_liverworts(self):
-        val_counts = self._get_val_counts('LIV_IDENT')
+        val_counts = _get_val_counts(self.df, 'LIV_IDENT')
         return str(val_counts)
 
     def _get_liches(self):
-        val_counts = self._get_val_counts('LICH_IDENT')
+        val_counts = _get_val_counts(self.df, 'LICH_IDENT')
         return str(val_counts)
 
     def _get_vascular(self):
@@ -311,7 +312,7 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        val_counts = self._get_val_counts('FLOR_QUAL')
+        val_counts = _get_val_counts(self.df, 'FLOR_QUAL')
         return str(_translate(val_counts, table))
 
     def _get_cryptogam(self):
@@ -323,7 +324,7 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        val_counts = self._get_val_counts('CRYP_QUAL')
+        val_counts = _get_val_counts(self.df, 'CRYP_QUAL')
         return str(_translate(val_counts, table))
 
     def _get_latitude(self):

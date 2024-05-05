@@ -4,6 +4,8 @@ from apps.publications.models import Publication
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from apps.datasets.validators import env_validator
+
 
 LOAN_STATUS = (
     ('pu', 'Public'),
@@ -12,10 +14,10 @@ LOAN_STATUS = (
 
 
 class Dataset(models.Model):
-    title = models.CharField(max_length=200, blank=True)
+    title = models.CharField(max_length=200)
     summary = models.TextField(help_text="A brief description of the dataset.", blank=True)
 
-    env = models.FileField(upload_to='datasets/env/', blank=True)
+    env = models.FileField(upload_to='datasets/env/', validators=[env_validator])
     spp = models.FileField(upload_to='datasets/spp/', blank=True)
     image = models.ImageField(upload_to='datasets/img/', blank=True)
     download_url = models.URLField('Download link', blank=True)
