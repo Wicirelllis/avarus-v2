@@ -5,66 +5,66 @@
 
 <div class="container text-start">
     <div class="row">
-        <div class="col-4 p-2">Dataset</div>
+        <div class="col-4 p-2">{% translate "Dataset" %}</div>
         <div class="col-8 p-2">{{ dataset.title }}</div>
 
-        <div class="col-4 p-2">Authors</div>
+        <div class="col-4 p-2">{% translate "Authors" %}</div>
         <div class="col-8 p-2">
             {% for a in dataset.authors.all %}
                 <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </div>
 
-        <div class="col-4 p-2">Year</div>
+        <div class="col-4 p-2">{% translate "Year" %}</div>
         <div class="col-8 p-2">{{ dataset.year|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Number of plots</div>
+        <div class="col-4 p-2">{% translate "Number of plots" %}</div>
         <div class="col-8 p-2">{{ dataset.n_plots|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Coverscale</div>
+        <div class="col-4 p-2">{% translate "Coverscale" %}</div>
         <div class="col-8 p-2">{{ dataset.coverscale|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Key site coordinates</div>
+        <div class="col-4 p-2">{% translate "Key site coordinates" %}</div>
         <div class="col-8 p-2">
             {% if dataset.latitude and dataset.longitude %}
                 {{ dataset.latitude|floatformat:5 }}&deg;, {{ dataset.longitude|floatformat:5 }}&deg;
             {% endif %}
         </div>
 
-        <div class="col-4 p-2">Plots geotagged</div>
+        <div class="col-4 p-2">{% translate "Plots geotagged" %}</div>
         <div class="col-8 p-2">{{ dataset.geotagged|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Region</div>
+        <div class="col-4 p-2">{% translate "Region" %}</div>
         <div class="col-8 p-2">{{ dataset.region|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Location</div>
+        <div class="col-4 p-2">{% translate "Location" %}</div>
         <div class="col-8 p-2">{{ dataset.location|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Subzone</div>
+        <div class="col-4 p-2">{% translate "Subzone" %}</div>
         <div class="col-8 p-2">{{ dataset.subzone|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Permafrost type</div>
+        <div class="col-4 p-2">{% translate "Permafrost type" %}</div>
         <div class="col-8 p-2">{{ dataset.permafrost_type|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Permafrost data</div>
+        <div class="col-4 p-2">{% translate "Permafrost data" %}</div>
         <div class="col-8 p-2">{{ dataset.permafrost_data|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Additional data</div>
+        <div class="col-4 p-2">{% translate "Additional data" %}</div>
         <div class="col-8 p-2">{{ dataset.additional_data|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Mosses identified</div>
+        <div class="col-4 p-2">{% translate "Mosses identified" %}</div>
         <div class="col-8 p-2">{{ dataset.mosses|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Liverworts identified</div>
+        <div class="col-4 p-2">{% translate "Liverworts identified" %}</div>
         <div class="col-8 p-2">{{ dataset.liverworts|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Lichens identified</div>
+        <div class="col-4 p-2">{% translate "Lichens identified" %}</div>
         <div class="col-8 p-2">{{ dataset.liches|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Vascular plant taxonomic quality</div>
+        <div class="col-4 p-2">{% translate "Vascular plant taxonomic quality" %}</div>
         <div class="col-8 p-2">{{ dataset.vascular|default_if_none:"&mdash;" }}</div>
 
-        <div class="col-4 p-2">Cryptogam taxonomic quality</div>
+        <div class="col-4 p-2">{% translate "Cryptogam taxonomic quality" %}</div>
         <div class="col-8 p-2">{{ dataset.cryptogam|default_if_none:"&mdash;" }}</div>
     </div>
 </div>

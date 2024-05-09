@@ -16,13 +16,13 @@
 <div class="p-3 outer-container">
 	<div class="d-flex align-items-start">
 		<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			<button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
-			<button class="nav-link" id="v-pills-available-datasets-tab" data-bs-toggle="pill" data-bs-target="#v-pills-available-datasets" type="button" role="tab" aria-controls="v-pills-available-datasets" aria-selected="false">Available datasets</button>
-			<button class="nav-link" id="v-pills-requested-datasets-tab" data-bs-toggle="pill" data-bs-target="#v-pills-requested-datasets" type="button" role="tab" aria-controls="v-pills-requested-datasets" aria-selected="false">Dataset requests</button>
+			<button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">{% translate "Profile" %}</button>
+			<button class="nav-link" id="v-pills-available-datasets-tab" data-bs-toggle="pill" data-bs-target="#v-pills-available-datasets" type="button" role="tab" aria-controls="v-pills-available-datasets" aria-selected="false">{% translate "Available datasets" %}</button>
+			<button class="nav-link" id="v-pills-requested-datasets-tab" data-bs-toggle="pill" data-bs-target="#v-pills-requested-datasets" type="button" role="tab" aria-controls="v-pills-requested-datasets" aria-selected="false">{% translate "Dataset requests" %}</button>
 			<div class="container p-5">
 				<form action="{% url 'logout' %}" method="post">
 					{% csrf_token %}
-					<button class="nav-link btn-link" type="submit">Log Out</button>
+					<button class="nav-link btn-link" type="submit">{% translate "Log Out" %}</button>
 				</form>
 			</div>
 
@@ -32,29 +32,29 @@
 			<div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-					  <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-tab-pane" type="button" role="tab" aria-controls="about-tab-pane" aria-selected="true">About</button>
+					  <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-tab-pane" type="button" role="tab" aria-controls="about-tab-pane" aria-selected="true">{% translate "About" %}</button>
 					</li>
 					<li class="nav-item" role="presentation">
-					  <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Edit</button>
+					  <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">{% translate "Edit" %}</button>
 					</li>
 				</ul>
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="about-tab-pane" role="tabpanel" aria-labelledby="about-tab" tabindex="0">
 						<div class="container text-start">
 							<div class="row">
-								<div class="col-6 p-2"><strong>Login</strong></div>
+								<div class="col-6 p-2"><strong>{% translate "Login" %}</strong></div>
 								<div class="col-6 p-2">{{ user.get_username }}</div>
 
-								<div class="col-6 p-2"><strong>Email</strong></div>
+								<div class="col-6 p-2"><strong>{% translate "Email" %}</strong></div>
 								<div class="col-6 p-2">{{ user.email }}</div>
 							
-								<div class="col-6 p-2"><strong>Name</strong></div>
+								<div class="col-6 p-2"><strong>{% translate "Name" %}</strong></div>
 								<div class="col-6 p-2">{{ user.first_name }} {{ user.last_name }}</div>
 							
-								<div class="col-6 p-2"><strong>Organization</strong></div>
+								<div class="col-6 p-2"><strong>{% translate "Organization" %}</strong></div>
 								<div class="col-6 p-2">{{ user.organization }}</div>
 							
-								<div class="col-6 p-2"><strong>Position</strong></div>
+								<div class="col-6 p-2"><strong>{% translate "Position" %}</strong></div>
 								<div class="col-6 p-2">{{ user.position }}</div>
 							</div>
 						</div>
@@ -71,7 +71,7 @@
 								</div>
 							</div>
 							<div class="d-flex justify-content-center">
-								<button type="submit" class="btn btn-success">Save</button>
+								<button type="submit" class="btn btn-success">{% translate "Save" %}</button>
 							</div>
 						</form>
 			

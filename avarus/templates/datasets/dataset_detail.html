@@ -26,36 +26,36 @@
                     </div>
                     <div class="col-4">
                         <h4 class="card-header text-center">
-                            Location description
+                            {% translate "Location description" %}
                         </h4>
                         <div class="card-body">
-                            <p><strong>Authors:</strong>
+                            <p><strong>{% translate "Authors" %}:</strong>
                                 {% for a in dataset.authors.all %}
                                     <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </p>
-                            <p><strong>Year:</strong> {{ dataset.year|default_if_none:"&mdash;" }}</p>
-                            <p><strong>Region:</strong> {{ dataset.region|default_if_none:"&mdash;" }}</p>
-                            <p><strong>Number of plots:</strong> {{ dataset.n_plots|default_if_none:"&mdash;" }}</p>
+                            <p><strong>{% translate "Year" %}:</strong> {{ dataset.year|default_if_none:"&mdash;" }}</p>
+                            <p><strong>{% translate "Region" %}:</strong> {{ dataset.region|default_if_none:"&mdash;" }}</p>
+                            <p><strong>{% translate "Number of plots" %}:</strong> {{ dataset.n_plots|default_if_none:"&mdash;" }}</p>
                         </div>
                         <div class="card-footer">
                             {% if not user.is_authenticated %}
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
-                                    Request
+                                    {% translate "Request access" %}
                                 </button>
                                 <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="requestModalLabel">Request dataset</h1>
+                                                <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="d-flex justify-content-center">
-                                                    Please &nbsp;<a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log In</a>
+                                                    {% translate "Please" %} &nbsp;<a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">{% translate "Log In" %}</a>
                                                 </div>
                                                 <div class="d-flex justify-content-center">
-                                                    Don't have an account? &nbsp;<a href="{% url 'register' %}?next={{ request.get_full_path|urlencode }}">Sign Up</a>
+                                                    {% translate "Don't have an account?" %} &nbsp;<a href="{% url 'register' %}?next={{ request.get_full_path|urlencode }}">{% translate "Sign Up" %}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,19 +63,19 @@
                                 </div>
                             {% elif dataset.status == 'pu' or user in dataset.available_to.all %}
                                 {% if dataset.download_url %}
-                                    <a class="btn btn-primary" href="{{ dataset.download_url }}" target="_blank">Download</a>
+                                    <a class="btn btn-primary" href="{{ dataset.download_url }}" target="_blank">{% translate "Download" %}</a>
                                 {% else %}
-                                    Dataset is currently unavailable.
+                                    {% translate "Dataset is currently unavailable." %}
                                 {% endif %}
                             {% else %}
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
-                                    Request
+                                    {% translate "Request access" %}
                                 </button>
                                 <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="requestModalLabel">Request dataset</h1>
+                                                <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -83,7 +83,7 @@
                                                     {% csrf_token %}
                                                     {% bootstrap_form request_form %}
                                                     <div class="d-flex justify-content-center">
-                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                        <button type="submit" class="btn btn-success">{% translate "Submit" %}</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -99,26 +99,26 @@
             <div class="container">
                 <ul class="nav nav-tabs mx-auto justify-content-center flex-nowrap" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="general-data-tab" data-bs-toggle="tab" data-bs-target="#general-data" type="button" role="tab" aria-controls="general-data" aria-selected="true">General data</button>
+                        <button class="nav-link active" id="general-data-tab" data-bs-toggle="tab" data-bs-target="#general-data" type="button" role="tab" aria-controls="general-data" aria-selected="true">{% translate "General data" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="relief-tab" data-bs-toggle="tab" data-bs-target="#relief" type="button" role="tab" aria-controls="relief" aria-selected="false">Relief</button>
+                        <button class="nav-link" id="relief-tab" data-bs-toggle="tab" data-bs-target="#relief" type="button" role="tab" aria-controls="relief" aria-selected="false">{% translate "Relief" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="soil-tab" data-bs-toggle="tab" data-bs-target="#soil" type="button" role="tab" aria-controls="soil" aria-selected="false">Soil texture</button>
+                        <button class="nav-link" id="soil-tab" data-bs-toggle="tab" data-bs-target="#soil" type="button" role="tab" aria-controls="soil" aria-selected="false">{% translate "Soil texture" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="ecotope-tab" data-bs-toggle="tab" data-bs-target="#ecotope" type="button" role="tab" aria-controls="ecotope" aria-selected="false">Ecotope data</button>
+                        <button class="nav-link" id="ecotope-tab" data-bs-toggle="tab" data-bs-target="#ecotope" type="button" role="tab" aria-controls="ecotope" aria-selected="false">{% translate "Ecotope data" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="phytocoenosis-tab" data-bs-toggle="tab" data-bs-target="#phytocoenosis" type="button" role="tab" aria-controls="phytocoenosis" aria-selected="false">Phytocoenosis data</button>
+                        <button class="nav-link" id="phytocoenosis-tab" data-bs-toggle="tab" data-bs-target="#phytocoenosis" type="button" role="tab" aria-controls="phytocoenosis" aria-selected="false">{% translate "Phytocoenosis data" %}</button>
                     </li>
     
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="disturbance-tab" data-bs-toggle="tab" data-bs-target="#disturbance" type="button" role="tab" aria-controls="disturbance" aria-selected="false">Disturbance</button>
+                        <button class="nav-link" id="disturbance-tab" data-bs-toggle="tab" data-bs-target="#disturbance" type="button" role="tab" aria-controls="disturbance" aria-selected="false">{% translate "Disturbance" %}</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pubications-tab" data-bs-toggle="tab" data-bs-target="#pubications" type="button" role="tab" aria-controls="pubications" aria-selected="false">Pubications</button>
+                        <button class="nav-link" id="pubications-tab" data-bs-toggle="tab" data-bs-target="#pubications" type="button" role="tab" aria-controls="pubications" aria-selected="false">{% translate "Publications" %}</button>
                     </li>
                 </ul>
       

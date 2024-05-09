@@ -27,7 +27,7 @@
             </div>
             <div class="card-text">
                 {% if publication.authors %}
-                    <strong>Authors:</strong>
+                    <strong>{% translate "Authors" %}:</strong>
                     {% for a in publication.authors.all %}
                         <a href="{{ a.get_absolute_url }}">{{ a }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
@@ -40,7 +40,7 @@
 
         <div class="card-body">
             <h5 class="card-header">
-                Related datasets
+                {% translate "Related datasets" %}
             </h5>
             <ul class="list-group list-group-flush">
                 {% for d in publication.datasets.all %}

@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-09 12:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: apps/datasets/forms.py:11
+msgid "Please describe your plans for using the data"
+msgstr "Пожалуйста опишите ваши планы по использованию датасета"
+
+#: apps/profiles/models.py:7
+msgid "organization"
+msgstr "Организация"
+
+#: apps/profiles/models.py:8
+msgid "position"
+msgstr "Должность"
+
+#: apps/profiles/models.py:9
+msgid "photo"
+msgstr "Фото"
+
+#: avarus/settings.py:113
+msgid "EN"
+msgstr ""
+
+#: avarus/settings.py:114
+msgid "RU"
+msgstr ""
+
+#: templates/about.html:21
+msgid "The Arctic Vegetation Archive (AVA)"
+msgstr ""
+
+#: templates/about.html:22
+msgid ""
+"is an international effort to assemble circumpolar Arctic vegetation plot "
+"data into a publically accessible web-based archive."
+msgstr ""
+"международный проект по сбору информации о растительности Арктического "
+"региона в доступную базу данных."
+
+#: templates/about.html:23
+msgid ""
+"The goal of AVA is to unite and standardize vegetation data from the Arctic "
+"that will give researchers a unique opportunity to analyze vegetation at pan-"
+"arctic scale. The initiative is endorsed by"
+msgstr ""
+"Цель AVA – объединить и стандартизировать разрозненные данные, собранные в "
+"разные годы специалистами-геоботаниками. Инициатива одобрена"
+
+#: templates/about.html:24
+msgid "the Conservation of Arctic Flora and Fauna of the Arctic Council"
+msgstr "Рабочей группой по сохранению арктической флоры и фауны"
+
+#: templates/about.html:25
+msgid "and"
+msgstr "и"
+
+#: templates/about.html:26
+msgid "the International Arctic Science Committee"
+msgstr "и Международным арктическим научным комитетом"
+
+#: templates/about.html:28
+msgid "read more"
+msgstr "читать еще"
+
+#: templates/about.html:32
+msgid ""
+"At present, AVA consists of about 30’000 data plots, mostly from Alaska, "
+"Canada and Scandinavia, stored in Arctic regional databases. The Russian AVA "
+"section is under rapid development. In cooperation with data authors we are "
+"working on archiving and harmonizing information on the vegetation "
+"composition of the Russian Arctic. Our website presents the Russian AVA data "
+"and provides an overview of available data for downloading. Access to the "
+"AVA data is diverse: previously published data could be"
+msgstr ""
+"В настоящее время Архив растительности Арктики насчитывает около 30’000 "
+"геоботанических описаний. Основную часть данных составляют описания "
+"растительности Аляски, Канады и Скандинавии, хранящиеся в региональных базах "
+"данных. Совместно с авторами описаний мы работаем над наполнением и "
+"стандартизацией данных для Архива, материалы которого представлены на этом "
+"вебсайте. Архив и отдельные его части доступны для скачивания через веб-"
+"интерфейс. Ранее опубликованные данные могут быть "
+
+#: templates/about.html:33
+msgid ""
+"downloaded directly and unpublished data – after a confirmation given by the "
+"dataset author (user agreement signing is needed)"
+msgstr ""
+"скачаны напрямую с сайта, неопубликованные – после принятия "
+"пользовательского соглашения и получения разрешения данного автором."
+
+#: templates/about.html:34
+msgid ""
+"A.N. Severtsov Institute of Ecology and Evolution RAS leads the effort. HSE "
+"Tikhonov Moscow Institute of Electronics and Mathematics provides technical "
+"assistance for the website. Project is supported by RFBR 18-04-01010 А."
+msgstr ""
+"Проект курирует Институт проблем экологии и эволюции имени А.Н. Северцова. "
+"Техническую поддержку оказывает Департамент компьютерной инженерии МИЭМ НИУ "
+"ВШЭ. Реализация поддержана грантом РФФИ N 18-04-01010 А."
+
+#: templates/about.html:50
+msgid "Ksenia Ermokhina"
+msgstr "Ксения Ермохина"
+
+#: templates/about.html:51
+msgid "A.N. Severtsov Institute of Ecology and Evolution RAS, Moscow"
+msgstr "Институт проблем экологии и эволюции им. А.Н. Северцова РАН, Москва"
+
+#: templates/about.html:59
+msgid "Maria Kurysheva"
+msgstr "Мария Курышева"
+
+#: templates/about.html:60 templates/about.html:78
+msgid "HSE Tikhonov Moscow Institute of Electronics and Mathematics, Moscow"
+msgstr ""
+"НИУ ВШЭ, Московский государственный институт электроники и математики, Москва"
+
+#: templates/about.html:68
+msgid "Vitalii Zemlianskii"
+msgstr "Виталий Землянский"
+
+#: templates/about.html:69
+msgid ""
+"University of Zurich, Department of Evolutionary Biology and Environmental "
+"Studies, Zurich"
+msgstr ""
+"Цюрихский университет, Кафедра эволюционной биологии и экологических "
+"исследований, Цюрих"
+
+#: templates/about.html:77
+msgid "Denis Korolev"
+msgstr "Денис Королев"
+
+#: templates/about.html:85
+msgid "Contact Us"
+msgstr "Напишите нам"
+
+#: templates/about.html:86
+msgid ""
+"Great vision without great people is irrelevant.<br>Let's work together."
+msgstr ""
+"Великое видение без великих людей не имеет значения. <br>Давайте работать "
+"вместе."
+
+#: templates/authors/author_detail.html:17 templates/base.html:52
+#: templates/datasets/datasets.html:15
+msgid "Datasets"
+msgstr "Датасеты"
+
+#: templates/authors/author_detail.html:30 templates/base.html:55
+#: templates/datasets/dataset_detail.html:121
+#: templates/publications/publications.html:15
+msgid "Publications"
+msgstr "Публикации"
+
+#: templates/authors/authors.html:12 templates/datasets/dataset_detail.html:32
+#: templates/datasets/general_data.html:11
+#: templates/publications/publication_detail.html:30
+msgid "Authors"
+msgstr "Авторы"
+
+#: templates/base.html:46
+msgid "Home"
+msgstr "На главную"
+
+#: templates/base.html:49
+msgid "About us"
+msgstr "О нас"
+
+#: templates/base.html:58 templates/related_projects/related_projects.html:15
+msgid "Related projects"
+msgstr "Связанные проекты"
+
+#: templates/base.html:61
+msgid "Instructions"
+msgstr "Инструкции"
+
+#: templates/base.html:65
+msgid "Statistics"
+msgstr "Статистика"
+
+#: templates/base.html:68 templates/registration/profile.html:19
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/base.html:72
+msgid "Sign In"
+msgstr "Войти"
+
+#: templates/datasets/dataset_detail.html:29
+msgid "Location description"
+msgstr "Описание"
+
+#: templates/datasets/dataset_detail.html:37
+#: templates/datasets/general_data.html:18
+msgid "Year"
+msgstr "Год"
+
+#: templates/datasets/dataset_detail.html:38
+#: templates/datasets/general_data.html:37
+msgid "Region"
+msgstr "Регион"
+
+#: templates/datasets/dataset_detail.html:39
+#: templates/datasets/general_data.html:21
+msgid "Number of plots"
+msgstr "Количество "
+
+#: templates/datasets/dataset_detail.html:44
+#: templates/datasets/dataset_detail.html:50
+#: templates/datasets/dataset_detail.html:72
+#: templates/datasets/dataset_detail.html:78
+msgid "Request access"
+msgstr "Запросить доступ"
+
+#: templates/datasets/dataset_detail.html:55
+msgid "Please"
+msgstr "Пожалуйста"
+
+#: templates/datasets/dataset_detail.html:55
+#: templates/registration/login.html:22 templates/registration/register.html:25
+msgid "Log In"
+msgstr "Войти"
+
+#: templates/datasets/dataset_detail.html:58
+#: templates/registration/login.html:25
+msgid "Don't have an account?"
+msgstr "Нет аккаунта?"
+
+#: templates/datasets/dataset_detail.html:58
+#: templates/registration/login.html:25 templates/registration/register.html:22
+msgid "Sign Up"
+msgstr "Зарегистрироваться"
+
+#: templates/datasets/dataset_detail.html:66
+msgid "Download"
+msgstr "Скачать"
+
+#: templates/datasets/dataset_detail.html:68
+msgid "Dataset is currently unavailable."
+msgstr "Датасет недоступен"
+
+#: templates/datasets/dataset_detail.html:86
+msgid "Submit"
+msgstr "Отправить"
+
+#: templates/datasets/dataset_detail.html:102
+msgid "General data"
+msgstr "Общие данные"
+
+#: templates/datasets/dataset_detail.html:105
+msgid "Relief"
+msgstr "Рельеф"
+
+#: templates/datasets/dataset_detail.html:108
+msgid "Soil texture"
+msgstr ""
+
+#: templates/datasets/dataset_detail.html:111
+msgid "Ecotope data"
+msgstr ""
+
+#: templates/datasets/dataset_detail.html:114
+msgid "Phytocoenosis data"
+msgstr ""
+
+#: templates/datasets/dataset_detail.html:118
+msgid "Disturbance"
+msgstr ""
+
+#: templates/datasets/dataset_request_done.html:19
+msgid "Your request has been sent. We will contact you soon."
+msgstr "Запрос был отправлен. Мы свяжемся с вами."
+
+#: templates/datasets/general_data.html:8
+msgid "Dataset"
+msgstr "Датасет"
+
+#: templates/datasets/general_data.html:24
+msgid "Coverscale"
+msgstr ""
+
+#: templates/datasets/general_data.html:27
+msgid "Key site coordinates"
+msgstr "Координаты"
+
+#: templates/datasets/general_data.html:34
+msgid "Plots geotagged"
+msgstr ""
+
+#: templates/datasets/general_data.html:40
+msgid "Location"
+msgstr "Локация"
+
+#: templates/datasets/general_data.html:43
+msgid "Subzone"
+msgstr "Плдзона"
+
+#: templates/datasets/general_data.html:46
+msgid "Permafrost type"
+msgstr "Тип вечной мерзлоты"
+
+#: templates/datasets/general_data.html:49
+msgid "Permafrost data"
+msgstr ""
+
+#: templates/datasets/general_data.html:52
+msgid "Additional data"
+msgstr "Дополнительные данные"
+
+#: templates/datasets/general_data.html:55
+msgid "Mosses identified"
+msgstr "Идентифицировано мхов"
+
+#: templates/datasets/general_data.html:58
+msgid "Liverworts identified"
+msgstr "Идентифицировано печёночников"
+
+#: templates/datasets/general_data.html:61
+msgid "Lichens identified"
+msgstr "Идентифицировано лишайников"
+
+#: templates/datasets/general_data.html:64
+msgid "Vascular plant taxonomic quality"
+msgstr ""
+
+#: templates/datasets/general_data.html:67
+msgid "Cryptogam taxonomic quality"
+msgstr ""
+
+#: templates/home.html:32
+msgid "Designed for"
+msgstr "Разработано для"
+
+#: templates/home.html:32
+msgid "The Russian Academy of Sciences"
+msgstr "Российской академии наук"
+
+#: templates/home.html:32
+msgid "by"
+msgstr "от"
+
+#: templates/home.html:32
+msgid "MIEM HSE"
+msgstr "МИЭМ НИУ ВШЭ"
+
+#: templates/home.html:33
+msgid "Supported by"
+msgstr "При поддержке"
+
+#: templates/instructions.html:17
+msgid "Welcome,<br> To get the full functionality of the site, please"
+msgstr ""
+"Добро пожаловать, <br> чтобы получить доступ к полному функционалу сайта, "
+"пожалуйста"
+
+#: templates/instructions.html:17
+msgid "register"
+msgstr "зарегистрируйтесь"
+
+#: templates/instructions.html:17
+msgid "or"
+msgstr "или"
+
+#: templates/instructions.html:17
+msgid "log in"
+msgstr "войдите"
+
+#: templates/instructions.html:19
+msgid "Personal account"
+msgstr "Личный аккаунт"
+
+#: templates/instructions.html:20
+msgid ""
+"You can go to your personal account by clicking on your icon in the upper-"
+"right corner. You will get access to your profile, where all your data is "
+"stored. You can add your personal data to simplify the work on the site."
+msgstr ""
+"Вы можете перейти в личный кабинет, нажав иконку сверху справа. Здесь "
+"хранятся все ваши данные. Также вы можете добавить личную информацию, чтобы "
+"упростить работу на сайте"
+
+#: templates/instructions.html:22 templates/registration/profile.html:20
+msgid "Available datasets"
+msgstr "Доступные датасеты"
+
+#: templates/instructions.html:23
+msgid ""
+"This section contains all the datasets available to you at the moment. You "
+"may download and perform analysis of the dataset you are interested in."
+msgstr ""
+"Этот раздел содержит информацию о доступных вам датасетах на данный момент. "
+"Вы можете скачать интересующий вас датасет, нажав на его название"
+
+#: templates/instructions.html:25
+msgid "My requests"
+msgstr "Мои заявки"
+
+#: templates/instructions.html:26
+msgid ""
+"This section contains information about the status of your requests for "
+"access to datasets. Don't worry if getting access will take some time. The "
+"moderator will definitely see your request and respond."
+msgstr ""
+"Данный раздел содержит информация о статусе ваших запросов. Не боспокойтесь, "
+"подтверждение запроса требует времени. Модератор обязательно рассмотрит вашу "
+"заявку"
+
+#: templates/instructions.html:28
+msgid "Statistics and Analytics"
+msgstr "Статистика и аналитика"
+
+#: templates/instructions.html:30
+msgid ""
+"The Statistics section allows you to analyze the datasets available to you. "
+"The page contains a description of the types of analyses and lists of "
+"available datasets. For your convenience, you are invited to download the "
+"AVA Data Dictionary."
+msgstr ""
+"Раздел Статистика предоставляет возможность анализировать датасеты. Страница "
+"содержит описание типов анализа и список доступных датасетов. Для вашего "
+"удобства, вы можете скачать Словарь данных AVA"
+
+#: templates/instructions.html:32
+msgid "The analysis is carried out in two stages:"
+msgstr "Анализ проводится в 2 этапа"
+
+#: templates/instructions.html:35
+msgid "Select a dataset"
+msgstr "Выберите датасет"
+
+#: templates/instructions.html:38
+msgid "Selecting parameters or criteria for analysis"
+msgstr "Выберите параметры или критереии для анализа"
+
+#: templates/instructions.html:41
+msgid "You can download all the results of the analysis. Good luck!"
+msgstr "Вы сможете загрузить результаты анализа. Удачи"
+
+#: templates/publications/publication_detail.html:43
+msgid "Related datasets"
+msgstr "Связанные датасеты"
+
+#: templates/registration/login.html:28
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: templates/registration/login.html:28
+msgid "Reset it"
+msgstr "Сбросьте его"
+
+#: templates/registration/password_reset_form.html:21
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+#: templates/registration/profile.html:21
+msgid "Dataset requests"
+msgstr "Мои заявки"
+
+#: templates/registration/profile.html:25
+msgid "Log Out"
+msgstr "Выйти"
+
+#: templates/registration/profile.html:35
+msgid "About"
+msgstr "Обо мне"
+
+#: templates/registration/profile.html:38
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/registration/profile.html:45
+msgid "Login"
+msgstr "Логин"
+
+#: templates/registration/profile.html:48
+msgid "Email"
+msgstr "Эл. почта"
+
+#: templates/registration/profile.html:51
+msgid "Name"
+msgstr "Имя"
+
+#: templates/registration/profile.html:54
+msgid "Organization"
+msgstr "Организация"
+
+#: templates/registration/profile.html:57
+msgid "Position"
+msgstr "Должность"
+
+#: templates/registration/profile.html:74
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/registration/register.html:25
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"

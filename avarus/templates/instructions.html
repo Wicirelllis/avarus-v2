@@ -14,32 +14,31 @@
 {% block content %}
     <div class="container outer-container">
         {% if not user.is_authenticated %}
-            Welcome,<br>
-            To get the full functionality of the site, please, <a href="{% url 'register' %}">register</a> or <a href="{% url 'login' %}">log in</a>.
+            {% translate "Welcome,<br> To get the full functionality of the site, please" %}, <a href="{% url 'register' %}">{% translate "register" %}</a> {% translate "or" %} <a href="{% url 'login' %}">{% translate "log in" %}</a>.
         {% else %}
-            <h4>Personal account</h4>
-            <p>You can go to your personal account by clicking on your icon in the upper-right corner. You will get access to your profile, where all your data is stored. You can add your personal data to simplify the work on the site.</p>
+            <h4>{% translate "Personal account" %}</h4>
+            <p>{% translate "You can go to your personal account by clicking on your icon in the upper-right corner. You will get access to your profile, where all your data is stored. You can add your personal data to simplify the work on the site." %}</p>
 
-            <h4>Available datasets</h4>
-            <p>This section contains all the datasets available to you at the moment. You may download and perform analysis of the dataset you are interested in.</p>
+            <h4>{% translate "Available datasets" %}</h4>
+            <p>{% translate "This section contains all the datasets available to you at the moment. You may download and perform analysis of the dataset you are interested in." %}</p>
 
-            <h4>My requests</h4>
-            <p>This section contains information about the status of your requests for access to datasets. Don't worry if getting access will take some time. The moderator will definitely see your request and respond.</p>
+            <h4>{% translate "My requests" %}</h4>
+            <p>{% translate "This section contains information about the status of your requests for access to datasets. Don't worry if getting access will take some time. The moderator will definitely see your request and respond." %}</p>
 
-            <h4>Statistics and Analytics</h4>
+            <h4>{% translate "Statistics and Analytics" %}</h4>
             <p>
-                The Statistics section allows you to analyze the datasets available to you. The page contains a description of the types of analyses and lists of available datasets. For your convenience, you are invited to download the AVA Data Dictionary.<br>
+                {% translate "The Statistics section allows you to analyze the datasets available to you. The page contains a description of the types of analyses and lists of available datasets. For your convenience, you are invited to download the AVA Data Dictionary." %}<br>
 
-                The analysis is carried out in two stages:
+                {% translate "The analysis is carried out in two stages:" %}
                 <ul style="list-style-type: none;">
                     <li>
-                        1. Select a dataset
+                        1. {% translate "Select a dataset" %}
                     </li>
                     <li>    
-                        2. Selecting parameters or criteria for analysis
+                        2. {% translate "Selecting parameters or criteria for analysis" %}
                     </li>
                 </ul>
-                You can download all the results of the analysis. Good luck!
+                {% translate "You can download all the results of the analysis. Good luck!" %}
             </p>
         {% endif %}
     </div>

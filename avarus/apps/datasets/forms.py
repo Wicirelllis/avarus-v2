@@ -8,7 +8,7 @@ class DatasetRequestForm(forms.ModelForm):
           model = DatasetRequest
           fields = ['name', 'organization', 'position', 'email', 'purpose', 'dataset', 'user']
           widgets = {
-               'purpose': forms.Textarea(attrs={'placeholder': "Please describe your plans for using the data"}),
+               'purpose': forms.Textarea(attrs={'placeholder': _("Please describe your plans for using the data")}),
                'dataset': forms.HiddenInput(),
                'user': forms.HiddenInput(),
           }

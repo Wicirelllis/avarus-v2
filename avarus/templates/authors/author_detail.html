@@ -14,7 +14,7 @@
         </h3>
         <div class="card-body">
             <h5 class="card-header">
-                Datasets
+                {% translate "Datasets" %}
             </h5>
             <ul class="list-group list-group-flush">
                 {% for d in author.datasets.all %}
@@ -27,7 +27,7 @@
 
         <div class="card-body">
             <h5 class="card-header">
-                Publications
+                {% translate "Publications" %}
             </h5>
             <ul class="list-group list-group-flush">
                 {% for p in author.publications.all %}
