@@ -8,7 +8,7 @@ import pandas as pd
 
 def _get_val_counts(df: pd.DataFrame, field: str | list[str]) -> dict:
     ''' Return a dict containing counts of unique values '''
-    return df[field].fillna('NONE').value_counts(dropna=False).to_dict()
+    return df[field].fillna('No data').value_counts(dropna=False).to_dict()
 
 def _calc_completeness(df: pd.DataFrame) -> dict:
     ''' Calculate copleteness (percent of cell with data) for each column of dataframe '''
@@ -56,11 +56,10 @@ class ParseDataset:
 
     # chart data fields
     def _get_disturban(self):
-        data = self.df['DISTURBAN'].fillna('NONE').value_counts(dropna=False).to_dict()
+        data = _get_val_counts(self.df, 'DISTURBAN')
         table = {
             'DIS': 'Disturbed',
             'NAT': 'Natural',
-            'NONE': 'No data',
         }
         return {
             'title': 'Disturbance',
@@ -87,7 +86,7 @@ class ParseDataset:
         }
 
     def _get_soil_text(self):
-        data = self.df['SOIL_TEXT'].fillna('NONE').value_counts(dropna=False).to_dict()
+        data = _get_val_counts(self.df, 'SOIL_TEXT')
         table = {
             'GRV': 'Gravel or coarser',
             'SND': 'Sand',
@@ -275,7 +274,7 @@ class ParseDataset:
 
     def _get_location(self):
         val_counts = _get_val_counts(self.df, 'LOCATION')
-        return ','.join(val_counts.keys())
+        return ', '.join(val_counts.keys())
     
     def _get_subzone(self):
         table = {
