@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-
+import json
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.publications',
     'apps.related_projects',
     'apps.profiles',
+    'apps.feedback',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,7 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+FEEDBACK_SEND_EMAIL = os.environ['FEEDBACK_SEND_EMAIL']
+FEEDBACK_EMAIL_RECIPIENTS = json.loads(os.environ['FEEDBACK_EMAIL_RECIPIENTS'])

@@ -39,6 +39,7 @@ urlpatterns += i18n_patterns(
     path('datasets/', include('apps.datasets.urls')),
     path('related-projects/', include('apps.related_projects.urls')),
     path('', include('apps.profiles.urls')),
+    path('', include('apps.feedback.urls')),
     prefix_default_language=False
 )
 

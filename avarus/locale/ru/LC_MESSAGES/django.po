@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-09 12:21+0000\n"
+"POT-Creation-Date: 2024-05-10 11:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,11 +36,11 @@ msgstr "Должность"
 msgid "photo"
 msgstr "Фото"
 
-#: avarus/settings.py:113
+#: avarus/settings.py:114
 msgid "EN"
 msgstr ""
 
-#: avarus/settings.py:114
+#: avarus/settings.py:115
 msgid "RU"
 msgstr ""
 
@@ -117,6 +117,10 @@ msgstr ""
 "Техническую поддержку оказывает Департамент компьютерной инженерии МИЭМ НИУ "
 "ВШЭ. Реализация поддержана грантом РФФИ N 18-04-01010 А."
 
+#: templates/about.html:44
+msgid "Our team"
+msgstr "Наша команда"
+
 #: templates/about.html:50
 msgid "Ksenia Ermokhina"
 msgstr "Ксения Ермохина"
@@ -160,6 +164,10 @@ msgid ""
 msgstr ""
 "Великое видение без великих людей не имеет значения. <br>Давайте работать "
 "вместе."
+
+#: templates/about.html:93 templates/datasets/dataset_detail.html:86
+msgid "Submit"
+msgstr "Отправить"
 
 #: templates/authors/author_detail.html:17 templates/base.html:52
 #: templates/datasets/datasets.html:15
@@ -259,10 +267,6 @@ msgstr "Скачать"
 msgid "Dataset is currently unavailable."
 msgstr "Датасет недоступен"
 
-#: templates/datasets/dataset_detail.html:86
-msgid "Submit"
-msgstr "Отправить"
-
 #: templates/datasets/dataset_detail.html:102
 msgid "General data"
 msgstr "Общие данные"
@@ -346,6 +350,10 @@ msgstr ""
 #: templates/datasets/general_data.html:67
 msgid "Cryptogam taxonomic quality"
 msgstr ""
+
+#: templates/feedback/feedback_done.html:19
+msgid "Thank you for your feedback."
+msgstr "Спасибо за обратную связь"
 
 #: templates/home.html:32
 msgid "Designed for"

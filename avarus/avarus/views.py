@@ -2,7 +2,7 @@ from json import dumps
 
 from apps.map_locations.models import MapLocation
 from django.shortcuts import render
-
+from apps.feedback.forms import FeedbackForm
 
 def HomeView(request):
     locations = MapLocation.objects.all()
@@ -22,7 +22,8 @@ def HomeView(request):
     return render(request, 'home.html', {'json_data': json_data, 'locations': locations})
 
 def AboutView(request):
-    return render(request, 'about.html')
+    ctx = {'feedback_form': FeedbackForm()}
+    return render(request, 'about.html', ctx)
 
 def InstructionsView(request):
     return render(request, 'instructions.html')

@@ -35,13 +35,13 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-8 px-5">
                 <img src="{% static 'img/about/map.png' %}" class="card-img-top" alt="Map">
             </div>
         </div>
         <div class="row p-5 justify-content-center bg-secondary-subtle">
             <div class="col-12 p-3">
-                <h5 class="text-center">TEAM</h5>
+                <h2 class="text-center">{% translate "Our team" %}</h2>
             </div>
             <div class="col-2">
                 <div class="card m-2">
@@ -80,25 +80,17 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-4">
+        <div class="row justify-content-center p-5 align-items-center">
+            <div class="col-4 align-middle">
                 <h2 class="u-text u-text-1">{% trans "Contact Us" %}</h2>
                 <p class="u-text u-text-3">{% trans "Great vision without great people is irrelevant.<br>Let's work together."%}</p>
             </div>
             <div class="col-4 justify-content-center">
-                <form>
+                <form action="{% url 'feedback-form' %}" method="post">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="feedback-input-name" placeholder="Name" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" id="feedback-input-email" placeholder="Email" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                    {% bootstrap_form feedback_form %}
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">{% translate "Submit" %}</button>
                     </div>
                 </form>
             </div>
