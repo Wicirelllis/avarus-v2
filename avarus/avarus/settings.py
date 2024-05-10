@@ -3,11 +3,22 @@ from pathlib import Path
 import json
 from django.utils.translation import gettext_lazy as _
 
+
+def _read_env_str(name: str) -> str:
+    return os.getenv(name, '')
+
+def _read_env_bool(name: str) -> bool:
+    return bool(os.getenv(name, 'False') == 'True')
+
+def _read_env_list(name: str) -> list:
+    return json.loads(os.getenv(name, '[]'))
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = _read_env_str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': 'postgres_db',
-        'NAME': os.environ['POSTGRES_DB'],
-        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'NAME': _read_env_str('POSTGRES_DB'),
+        'PASSWORD': _read_env_str('POSTGRES_PASSWORD'),
         'PORT': '5432',
-        'USER': os.environ['POSTGRES_USER'],
+        'USER': _read_env_str('POSTGRES_USER'),
     }
 }
 
@@ -140,14 +151,18 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_USER = _read_env_str('EMAIL_HOST_USER')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_PASSWORD = _read_env_str('EMAIL_HOST_PASSWORD')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
-FEEDBACK_SEND_EMAIL = os.environ['FEEDBACK_SEND_EMAIL']
-FEEDBACK_EMAIL_RECIPIENTS = json.loads(os.environ['FEEDBACK_EMAIL_RECIPIENTS'])
+FEEDBACK_SEND_EMAIL = _read_env_bool('FEEDBACK_SEND_EMAIL')
+FEEDBACK_EMAIL_RECIPIENTS = _read_env_list('FEEDBACK_EMAIL_RECIPIENTS')
+
+
+DATASET_REQUEST_SEND_EMAIL = _read_env_bool('DATASET_REQUEST_SEND_EMAIL')
+DATASET_REQUEST_EMAIL_RECIPIENTS = _read_env_list('DATASET_REQUEST_EMAIL_RECIPIENTS')

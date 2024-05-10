@@ -103,10 +103,10 @@ class DatasetRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, help_text='User that requested access')
     dataset = models.ForeignKey(Dataset, on_delete=models.PROTECT)
     name = models.CharField('Name', max_length=120)
-    organization = models.CharField('Organization', max_length=120, null=True)
-    position = models.CharField('Position', max_length=120, null=True)
-    email = models.EmailField('Email', max_length=120, null=True, blank=True)
-    purpose = models.TextField('Purpose', null=True)
+    organization = models.CharField('Organization', max_length=120)
+    position = models.CharField('Position', max_length=120)
+    email = models.EmailField('Email', max_length=120)
+    purpose = models.TextField('Purpose')
     status = models.CharField(max_length=1, choices=ACCESS_STATUS, blank=True, default='r')
 
 
@@ -114,4 +114,4 @@ class DatasetRequest(models.Model):
         verbose_name = 'Dataset access request'
 
     def __str__(self):
-        return str(self.dataset.title)
+        return f'{self.dataset} | {self.user}'

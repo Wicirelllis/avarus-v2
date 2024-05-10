@@ -1,8 +1,10 @@
 from apps.datasets.forms import DatasetRequestForm
 from django.shortcuts import redirect, render
 from django.views import generic
+from django.core.mail import send_mail
 
 from .models import Dataset
+from django.conf import settings
 
 
 def DatasetsView(request):
@@ -35,7 +37,20 @@ class DatasetRequestFormView(generic.View):
     def post(self, request):
         form = DatasetRequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            dataset_request = form.save()
+            if settings.DATASET_REQUEST_SEND_EMAIL:
+                send_mail(
+                    f'Dataset access request from {dataset_request.user}',
+                    (
+                        f'User {dataset_request.user} (email: {dataset_request.user.email}) has requested access to dataset {dataset_request.dataset}\n\n'
+                        f'Name: {dataset_request.name}\n'
+                        f'Organization: {dataset_request.organization}\n'
+                        f'Position: {dataset_request.position}\n\n'
+                        f'Purpose:\n{dataset_request.purpose}'
+                    ),
+                    settings.EMAIL_HOST_USER,
+                    settings.DATASET_REQUEST_EMAIL_RECIPIENTS
+                )
         return redirect('dataset-request-done')
 
     def get(self, request):
