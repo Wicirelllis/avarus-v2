@@ -25,8 +25,6 @@
 					<button class="nav-link btn-link" type="submit">{% translate "Log Out" %}</button>
 				</form>
 			</div>
-
-			<!-- <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button> -->
 		</div>
 		<div class="tab-content" id="v-pills-tabContent">
 			<div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
@@ -80,25 +78,42 @@
 			</div>
 			<div class="tab-pane fade" id="v-pills-available-datasets" role="tabpanel" aria-labelledby="v-pills-available-datasets-tab" tabindex="0">
 				<ul class="list-group">
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<div class="col p-2 px-5">
+							Dataset
+						</div>
+						<div class="col p-2 px-5">
+							Download
+						</div>
+					</li>
 					{% for dataset in available_datasets %}
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="{{ dataset.get_absolute_url }}">
-								{{ dataset }}
-							</a>
+							<div class="col p-2">
+								<a href="{{ dataset.get_absolute_url }}">
+									{{ dataset }}
+								</a>
+							</div>
+							<div class="col p-2">
+								{% if dataset.download_url %}
+									<a href="{{ dataset.download_url }}">
+										Link
+									</a>
+								{% endif %}
+							</div>
 						</li>
 					{% endfor %}
 				</ul>
 			</div>
 			<div class="tab-pane fade" id="v-pills-requested-datasets" role="tabpanel" aria-labelledby="v-pills-requested-datasets-tab" tabindex="0">
 				<ul class="list-group">
-					{% for dataset in requested_datasets %}
+					{% for dataset_request in requested_datasets %}
 						<li class="list-group-item d-flex justify-content-between align-items-center">
 							<a href="{{ dataset.dataset.get_absolute_url }}">
-								{{ dataset }}&nbsp;
+								{{ dataset_request.dataset }}&nbsp;
 							</a>
-							{% if dataset.status == 'g' %}
+							{% if dataset_request.status == 'g' %}
 								<span class="badge m-2 text-bg-primary rounded-pill text-bg-success" title="Access granted">&#x2713;</span>
-							{% elif dataset.status == 'd' %}
+							{% elif dataset_request.status == 'd' %}
 								<span class="badge m-2 text-bg-primary rounded-pill text-bg-danger" title="Access denied">&#x2715;</span>
 							{% else %}
 								<span class="badge m-2 text-bg-primary rounded-pill text-bg-secondary" title="In review">?</span>
@@ -107,8 +122,6 @@
 					{% endfor %}
 				</ul>
 			</div>
-
-			<!-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div> -->
 		</div>
 	</div>
 </div>
