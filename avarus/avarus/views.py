@@ -25,5 +25,5 @@ def AboutView(request):
     ctx = {'feedback_form': FeedbackForm()}
     return render(request, 'about.html', ctx)
 
-def InstructionsView(request):
-    return render(request, 'instructions.html')
+def ServicesView(request):
+    return render(request, 'services.html')

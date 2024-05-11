@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-10 11:01+0000\n"
+"POT-Creation-Date: 2024-05-11 10:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,11 +36,11 @@ msgstr "Должность"
 msgid "photo"
 msgstr "Фото"
 
-#: avarus/settings.py:114
+#: avarus/settings.py:125
 msgid "EN"
 msgstr ""
 
-#: avarus/settings.py:115
+#: avarus/settings.py:126
 msgid "RU"
 msgstr ""
 
@@ -199,8 +199,8 @@ msgid "Related projects"
 msgstr "Связанные проекты"
 
 #: templates/base.html:61
-msgid "Instructions"
-msgstr "Инструкции"
+msgid "Services"
+msgstr "Сервисы"
 
 #: templates/base.html:65
 msgid "Statistics"
@@ -375,95 +375,6 @@ msgstr "МИЭМ НИУ ВШЭ"
 msgid "Supported by"
 msgstr "При поддержке"
 
-#: templates/instructions.html:17
-msgid "Welcome,<br> To get the full functionality of the site, please"
-msgstr ""
-"Добро пожаловать, <br> чтобы получить доступ к полному функционалу сайта, "
-"пожалуйста"
-
-#: templates/instructions.html:17
-msgid "register"
-msgstr "зарегистрируйтесь"
-
-#: templates/instructions.html:17
-msgid "or"
-msgstr "или"
-
-#: templates/instructions.html:17
-msgid "log in"
-msgstr "войдите"
-
-#: templates/instructions.html:19
-msgid "Personal account"
-msgstr "Личный аккаунт"
-
-#: templates/instructions.html:20
-msgid ""
-"You can go to your personal account by clicking on your icon in the upper-"
-"right corner. You will get access to your profile, where all your data is "
-"stored. You can add your personal data to simplify the work on the site."
-msgstr ""
-"Вы можете перейти в личный кабинет, нажав иконку сверху справа. Здесь "
-"хранятся все ваши данные. Также вы можете добавить личную информацию, чтобы "
-"упростить работу на сайте"
-
-#: templates/instructions.html:22 templates/registration/profile.html:20
-msgid "Available datasets"
-msgstr "Доступные датасеты"
-
-#: templates/instructions.html:23
-msgid ""
-"This section contains all the datasets available to you at the moment. You "
-"may download and perform analysis of the dataset you are interested in."
-msgstr ""
-"Этот раздел содержит информацию о доступных вам датасетах на данный момент. "
-"Вы можете скачать интересующий вас датасет, нажав на его название"
-
-#: templates/instructions.html:25
-msgid "My requests"
-msgstr "Мои заявки"
-
-#: templates/instructions.html:26
-msgid ""
-"This section contains information about the status of your requests for "
-"access to datasets. Don't worry if getting access will take some time. The "
-"moderator will definitely see your request and respond."
-msgstr ""
-"Данный раздел содержит информация о статусе ваших запросов. Не боспокойтесь, "
-"подтверждение запроса требует времени. Модератор обязательно рассмотрит вашу "
-"заявку"
-
-#: templates/instructions.html:28
-msgid "Statistics and Analytics"
-msgstr "Статистика и аналитика"
-
-#: templates/instructions.html:30
-msgid ""
-"The Statistics section allows you to analyze the datasets available to you. "
-"The page contains a description of the types of analyses and lists of "
-"available datasets. For your convenience, you are invited to download the "
-"AVA Data Dictionary."
-msgstr ""
-"Раздел Статистика предоставляет возможность анализировать датасеты. Страница "
-"содержит описание типов анализа и список доступных датасетов. Для вашего "
-"удобства, вы можете скачать Словарь данных AVA"
-
-#: templates/instructions.html:32
-msgid "The analysis is carried out in two stages:"
-msgstr "Анализ проводится в 2 этапа"
-
-#: templates/instructions.html:35
-msgid "Select a dataset"
-msgstr "Выберите датасет"
-
-#: templates/instructions.html:38
-msgid "Selecting parameters or criteria for analysis"
-msgstr "Выберите параметры или критереии для анализа"
-
-#: templates/instructions.html:41
-msgid "You can download all the results of the analysis. Good luck!"
-msgstr "Вы сможете загрузить результаты анализа. Удачи"
-
 #: templates/publications/publication_detail.html:43
 msgid "Related datasets"
 msgstr "Связанные датасеты"
@@ -480,6 +391,10 @@ msgstr "Сбросьте его"
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
+#: templates/registration/profile.html:20 templates/services.html:22
+msgid "Available datasets"
+msgstr "Доступные датасеты"
+
 #: templates/registration/profile.html:21
 msgid "Dataset requests"
 msgstr "Мои заявки"
@@ -488,38 +403,123 @@ msgstr "Мои заявки"
 msgid "Log Out"
 msgstr "Выйти"
 
-#: templates/registration/profile.html:35
+#: templates/registration/profile.html:33
 msgid "About"
 msgstr "Обо мне"
 
-#: templates/registration/profile.html:38
+#: templates/registration/profile.html:36
 msgid "Edit"
 msgstr "Редактировать"
 
-#: templates/registration/profile.html:45
+#: templates/registration/profile.html:43
 msgid "Login"
 msgstr "Логин"
 
-#: templates/registration/profile.html:48
+#: templates/registration/profile.html:46
 msgid "Email"
 msgstr "Эл. почта"
 
-#: templates/registration/profile.html:51
+#: templates/registration/profile.html:49
 msgid "Name"
 msgstr "Имя"
 
-#: templates/registration/profile.html:54
+#: templates/registration/profile.html:52
 msgid "Organization"
 msgstr "Организация"
 
-#: templates/registration/profile.html:57
+#: templates/registration/profile.html:55
 msgid "Position"
 msgstr "Должность"
 
-#: templates/registration/profile.html:74
+#: templates/registration/profile.html:72
 msgid "Save"
 msgstr "Сохранить"
 
 #: templates/registration/register.html:25
 msgid "Already have an account?"
 msgstr "Уже есть аккаунт?"
+
+#: templates/services.html:17
+msgid "Welcome,<br> To get the full functionality of the site, please"
+msgstr ""
+"Добро пожаловать, <br> чтобы получить доступ к полному функционалу сайта, "
+"пожалуйста"
+
+#: templates/services.html:17
+msgid "register"
+msgstr "зарегистрируйтесь"
+
+#: templates/services.html:17
+msgid "or"
+msgstr "или"
+
+#: templates/services.html:17
+msgid "log in"
+msgstr "войдите"
+
+#: templates/services.html:19
+msgid "Personal account"
+msgstr "Личный аккаунт"
+
+#: templates/services.html:20
+msgid ""
+"You can go to your personal account by clicking on your icon in the upper-"
+"right corner. You will get access to your profile, where all your data is "
+"stored. You can add your personal data to simplify the work on the site."
+msgstr ""
+"Вы можете перейти в личный кабинет, нажав иконку сверху справа. Здесь "
+"хранятся все ваши данные. Также вы можете добавить личную информацию, чтобы "
+"упростить работу на сайте"
+
+#: templates/services.html:23
+msgid ""
+"This section contains all the datasets available to you at the moment. You "
+"may download and perform analysis of the dataset you are interested in."
+msgstr ""
+"Этот раздел содержит информацию о доступных вам датасетах на данный момент. "
+"Вы можете скачать интересующий вас датасет, нажав на его название"
+
+#: templates/services.html:25
+msgid "My requests"
+msgstr "Мои заявки"
+
+#: templates/services.html:26
+msgid ""
+"This section contains information about the status of your requests for "
+"access to datasets. Don't worry if getting access will take some time. The "
+"moderator will definitely see your request and respond."
+msgstr ""
+"Данный раздел содержит информация о статусе ваших запросов. Не боспокойтесь, "
+"подтверждение запроса требует времени. Модератор обязательно рассмотрит вашу "
+"заявку"
+
+#: templates/services.html:28
+msgid "Statistics and Analytics"
+msgstr "Статистика и аналитика"
+
+#: templates/services.html:30
+msgid ""
+"The Statistics section allows you to analyze the datasets available to you. "
+"The page contains a description of the types of analyses and lists of "
+"available datasets. For your convenience, you are invited to download the "
+"AVA Data Dictionary."
+msgstr ""
+"Раздел Статистика предоставляет возможность анализировать датасеты. Страница "
+"содержит описание типов анализа и список доступных датасетов. Для вашего "
+"удобства, вы можете скачать Словарь данных AVA"
+
+#: templates/services.html:32
+msgid "The analysis is carried out in two stages:"
+msgstr "Анализ проводится в 2 этапа"
+
+#: templates/services.html:35
+msgid "Select a dataset"
+msgstr "Выберите датасет"
+
+#: templates/services.html:38
+msgid "Selecting parameters or criteria for analysis"
+msgstr "Выберите параметры или критереии для анализа"
+
+#: templates/services.html:41
+msgid "You can download all the results of the analysis. Good luck!"
+msgstr "Вы сможете загрузить результаты анализа. Удачи"
