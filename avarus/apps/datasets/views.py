@@ -42,7 +42,7 @@ class DatasetRequestFormView(generic.View):
                 send_mail(
                     f'Dataset access request from {dataset_request.user}',
                     (
-                        f'User {dataset_request.user} (email: {dataset_request.user.email}) has requested access to dataset {dataset_request.dataset}\n\n'
+                        f'User {dataset_request.user} (email: {dataset_request.email}) has requested access to dataset {dataset_request.dataset}\n\n'
                         f'Name: {dataset_request.name}\n'
                         f'Organization: {dataset_request.organization}\n'
                         f'Position: {dataset_request.position}\n\n'

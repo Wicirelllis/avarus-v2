@@ -106,18 +106,30 @@
 			</div>
 			<div class="tab-pane fade" id="v-pills-requested-datasets" role="tabpanel" aria-labelledby="v-pills-requested-datasets-tab" tabindex="0">
 				<ul class="list-group">
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<div class="col p-2 px-5">
+							Dataset
+						</div>
+						<div class="col p-2 px-5">
+							Status
+						</div>
+					</li>
 					{% for dataset_request in requested_datasets %}
 						<li class="list-group-item d-flex justify-content-between align-items-center">
-							<a href="{{ dataset.dataset.get_absolute_url }}">
-								{{ dataset_request.dataset }}&nbsp;
-							</a>
-							{% if dataset_request.status == 'g' %}
-								<span class="badge m-2 text-bg-primary rounded-pill text-bg-success" title="Access granted">&#x2713;</span>
-							{% elif dataset_request.status == 'd' %}
-								<span class="badge m-2 text-bg-primary rounded-pill text-bg-danger" title="Access denied">&#x2715;</span>
-							{% else %}
-								<span class="badge m-2 text-bg-primary rounded-pill text-bg-secondary" title="In review">?</span>
-							{% endif %}
+							<div class="col p-2">
+								<a href="{{ dataset_request.dataset.get_absolute_url }}">
+									{{ dataset_request.dataset }}&nbsp;
+								</a>
+							</div>
+							<div class="col p-2 text-center">
+								{% if dataset_request.status == 'g' %}
+									<span class="badge m-2 text-bg-primary rounded-pill text-bg-success" title="Access granted">&#x2713;</span>
+								{% elif dataset_request.status == 'd' %}
+									<span class="badge m-2 text-bg-primary rounded-pill text-bg-danger" title="Access denied">&#x2715;</span>
+								{% else %}
+									<span class="badge m-2 text-bg-primary rounded-pill text-bg-secondary" title="In review">?</span>
+								{% endif %}
+							</div>
 						</li>
 					{% endfor %}
 				</ul>
