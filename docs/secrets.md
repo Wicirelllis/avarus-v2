@@ -16,6 +16,8 @@
 
 `EMAIL_HOST_PASSWORD`: `str` - пароль (или токен) от адреса выше
 
+`YANDEX_MAPS_API_TOKEN`: `str` - ключ от API Яндекс.Карт (JavaScript API и HTTP Геокодер)
+
 ### postgress
 `POSTGRES_USER`: `str` - пользователь БД
 
@@ -47,10 +49,15 @@
 ### Как получить токен для gmail
 При использовании gmail использовать пароль не получится из-за 2FA, поэтому нужно создать токен.
 
-\TODO add step-by-step guide
+- Зайти на `https://myaccount.google.com/apppasswords`
+- Заполнить название и создать новый пароль для приложения
+- Сохранить его в `EMAIL_HOST_PASSWORD`
 
 ### Как получить токен для Яндекс.Карт
 Для отрисовки карты на главной сайта нужно получить токен API Яндекс.Карт.
 Делается в кабинете разработчика.
 
-\TODO add step-by-step guide
+- В кабинете разработчика (developer.tech.yandex.ru/services)
+- Родключить `JavaScript API и HTTP Геокодер`
+- В нем создать новый ключ
+- Сохранить ключ в `YANDEX_MAPS_API_TOKEN`
