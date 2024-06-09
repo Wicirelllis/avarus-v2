@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.related_projects',
     'apps.profiles',
     'apps.feedback',
+    'apps.statistics',
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,5 @@ FEEDBACK_EMAIL_RECIPIENTS = _read_env_list('FEEDBACK_EMAIL_RECIPIENTS')
 
 DATASET_REQUEST_SEND_EMAIL = _read_env_bool('DATASET_REQUEST_SEND_EMAIL')
 DATASET_REQUEST_EMAIL_RECIPIENTS = _read_env_list('DATASET_REQUEST_EMAIL_RECIPIENTS')
+
+SESSION_SAVE_EVERY_REQUEST = True

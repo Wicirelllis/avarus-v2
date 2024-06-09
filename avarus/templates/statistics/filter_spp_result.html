@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block header %}
+<title>Filter spp</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="p-3 outer-container">
+	Processing complete.
+    You may download the result below.<br>
+	<a class="btn btn-primary mx-3 my-5" href="{{ file_url }}" role="button">Download</a>
+</div>
+{% endblock content %}

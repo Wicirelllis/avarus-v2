@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block header %}
+<title>Correlation analysis</title>
+{% endblock %}
+
+
+{% block content %}
+	{% include "statistics/snippets/form_page.html" with title="Correlation analysis" %}
+{% endblock content %}

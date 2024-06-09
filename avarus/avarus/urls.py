@@ -35,6 +35,7 @@ urlpatterns += i18n_patterns(
     path('about/', views.AboutView, name='about'),
     path('services/', views.ServicesView, name='services'),
     path('publications/', include('apps.publications.urls')),
+    path('statistics/', include('apps.statistics.urls')),
     path('authors/', include('apps.authors.urls')),
     path('datasets/', include('apps.datasets.urls')),
     path('related-projects/', include('apps.related_projects.urls')),

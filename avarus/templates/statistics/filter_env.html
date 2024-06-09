@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block header %}
+<title>Filter env</title>
+{% endblock %}
+
+
+{% block content %}
+    {% include "statistics/snippets/form_page.html" with title="Filter env" %}
+{% endblock content %}

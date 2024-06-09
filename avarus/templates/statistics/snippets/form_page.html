@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<div class="p-3 outer-container">
+    <div class="card">
+        <h3 class="card-header text-center">
+            {% translate title %}
+        </h3>
+        <div class="card-body">
+            <form method="post" onsubmit="nonEmptyFormValiator();">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onClick="javascript:history.go(-1);">{% translate "Back" %}</button>
+                    <button type="submit" class="btn btn-primary">{% translate "Continue" %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="live-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Please, select an option in the form.
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function nonEmptyFormValiator () {
+        count = document.querySelectorAll("input.form-check-input:checked").length;
+        if (count == 0) {
+            event.preventDefault();
+            const liveToast = document.getElementById('live-toast');
+            const toastBootstrap = new bootstrap.Toast(liveToast);
+            toastBootstrap.show();
+        }
+    }
+</script>

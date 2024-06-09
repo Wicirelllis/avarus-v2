@@ -4,7 +4,8 @@ from contextlib import suppress
 import dateutil
 import numpy as np
 import pandas as pd
-
+from apps.datasets.utils import _read_env, _read_spp
+from apps.datasets import species
 
 def _get_val_counts(df: pd.DataFrame, field: str | list[str]) -> dict:
     ''' Return a dict containing counts of unique values '''
@@ -26,6 +27,7 @@ class ParseDataset:
     def __init__(self, dataset) -> None:
         self.dataset = dataset
         self.df: pd.DataFrame = self._read_env_excel()
+        self.spp: pd.DataFrame = _read_spp(dataset.spp.path)
         self._fix_header()
 
     def fill_fields(self, fields: list[str]):
@@ -333,3 +335,21 @@ class ParseDataset:
     def _get_longitude(self):
         data = self.df['LONGITUDE'].astype(float)
         return (np.max(data) + np.min(data)) / 2.
+
+    def _get_species_total(self):
+        return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].count()
+
+    def _get_species_liches(self):
+        return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(species.LICHEN).sum()
+
+    def _get_species_liverworts(self):
+        return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(species.LIVERWORT).sum()
+
+    def _get_species_mosses(self) -> int:
+        return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(species.MOSS).sum()
+
+    def _get_species_vascular(self):
+        return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(species.VASCULAR).sum()
+
+    def _get_species_unknown(self):
+        return self._get_species_total() - self._get_species_liches() - self._get_species_liverworts() - self._get_species_mosses() - self._get_species_vascular()

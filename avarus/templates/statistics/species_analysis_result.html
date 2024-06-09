@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block header %}
+<title>species analysis</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="p-3 outer-container">
+	<ul class="list-group">
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			<div class="col p-2 px-5">
+				Dataset
+			</div>
+			<div class="col p-2 px-5">
+				Count
+			</div>
+			<div class="col p-2 px-5">
+				Percent
+			</div>
+		</li>
+		{% for dataset in result %}
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<div class="col p-2 px-5">
+					<a href="{{ dataset.url }}">
+						{{ dataset.name }}
+					</a>
+				</div>
+				<div class="col p-2 px-5">
+					{{ dataset.count }}
+				</div>
+				<div class="col p-2 px-5">
+					{{ dataset.percent }}
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock content %}

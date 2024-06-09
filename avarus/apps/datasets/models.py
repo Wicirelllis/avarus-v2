@@ -1,11 +1,11 @@
 from apps.authors.models import Author
 from apps.datasets.parse import ParseDataset
+from apps.datasets.utils import _read_env, _read_spp
+from apps.datasets.validators import env_validator
 from apps.publications.models import Publication
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
-from apps.datasets.validators import env_validator
-
 
 LOAN_STATUS = (
     ('pu', 'Public'),
@@ -55,6 +55,36 @@ class Dataset(models.Model):
     phytocoenosis = models.JSONField(blank=True, default=dict)
     phytocoenosis_cover = models.JSONField(blank=True, default=dict)
 
+    # statistics
+    species_total = models.IntegerField(default=0)
+    species_liches = models.IntegerField(default=0)
+    species_liverworts = models.IntegerField(default=0)
+    species_mosses = models.IntegerField(default=0)
+    species_vascular = models.IntegerField(default=0)
+    species_unknown = models.IntegerField(default=0)
+
+    def get_col_names(self):
+        return _read_spp(self.spp.path).columns.values
+
+    def get_spp_rows(self):
+        return _read_spp(self.spp.path)['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)']
+
+    def get_spp_cols(self):
+        return _read_spp(self.spp.path).columns.values
+
+    def get_env_rows(self):
+        return _read_env(self.env.path)['FIELD_NR']
+
+    def get_env_cols(self):
+        return _read_env(self.env.path).columns.values
+
+    def get_env_numeric_cols(self):
+        return _read_env(self.env.path).columns.values
+
+    def get_env_col_values(self, col: str) -> set:
+        return set(_read_env(self.env.path)[col])
+
+
     def __str__(self):
         return self.title
 
@@ -84,6 +114,12 @@ class Dataset(models.Model):
             'cryptogam',
             'latitude',
             'longitude',
+            'species_total',
+            'species_liches',
+            'species_liverworts',
+            'species_mosses',
+            'species_vascular',
+            'species_unknown',
         ]
         ParseDataset(self).fill_fields(fields)
         super(Dataset, self).save(*args, **kwargs)
