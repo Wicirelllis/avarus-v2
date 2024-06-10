@@ -1,5 +1,7 @@
 __pycache__/
 *.py[cod]
 
+# secrets
 data/
 .env
+nginx.conf
