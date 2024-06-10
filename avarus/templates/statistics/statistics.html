@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block header %}
-<title>Statistics</title>
+<title>{% translate "Statistics" %}</title>
 {% endblock %}
 
 
@@ -20,62 +20,62 @@
 			<div class="tab-pane fade show active" id="v-pills-analysis" role="tabpanel" aria-labelledby="v-pills-analysis-tab" tabindex="0">
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Correlation analysis</h5>
+					  <h5 class="card-title">{% translate "Correlation analysis" %}</h5>
 					  <p class="card-text">Perform correlation analysis. Have to pick two numeric columns in spp file</p>
-					  <a href="{% url 'correlation-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'correlation-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Principal component analysis</h5>
+					  <h5 class="card-title">{% translate "Principal component analysis" %}</h5>
 					  <p class="card-text">Perform PCA.</p>
-					  <a href="{% url 'pca-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'pca-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Factor analysis</h5>
+					  <h5 class="card-title">{% translate "Factor analysis" %}</h5>
 					  <p class="card-text">Coming soon.</p>
-					  <a href="{% url 'factor-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'factor-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Cluster analysis</h5>
+					  <h5 class="card-title">{% translate "Cluster analysis" %}</h5>
 					  <p class="card-text">Coming soon.</p>
-					  <a href="{% url 'cluster-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'cluster-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="v-pills-available-datasets" role="tabpanel" aria-labelledby="v-pills-available-datasets-tab" tabindex="0">
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Filter spp</h5>
+					  <h5 class="card-title">{% translate "Filter spp" %}</h5>
 					  <p class="card-text">Spp-file with only selected species.</p>
-					  <a href="{% url 'filter-spp' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'filter-spp' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Filter env</h5>
+					  <h5 class="card-title">{% translate "Filter env" %}</h5>
 					  <p class="card-text">Env-file with only rows that have specific value in specified column.</p>
-					  <a href="{% url 'filter-env' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'filter-env' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="v-pills-requested-datasets" role="tabpanel" aria-labelledby="v-pills-requested-datasets-tab" tabindex="0">
                 <div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Species analysis (by group)</h5>
+					  <h5 class="card-title">{% translate "Species analysis (by group)" %}</h5>
 					  <p class="card-text">Statistics for species group (i.e. mosses) across all datasets.</p>
-					  <a href="{% url 'species-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'species-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 				<div class="card mx-5 my-3">
 					<div class="card-body">
-					  <h5 class="card-title">Species analysis (by dataset)</h5>
+					  <h5 class="card-title">{% translate "Species analysis (by dataset)" %}</h5>
 					  <p class="card-text">Statistic for signle dataset -- how many mosses, etc.</p>
-					  <a href="{% url 'dataset-species-analysis' %}" class="btn btn-primary">Continue</a>
+					  <a href="{% url 'dataset-species-analysis' %}" class="btn btn-primary">{% translate "Continue" %}</a>
 					</div>
 				</div>
 			</div>

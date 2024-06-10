@@ -8,7 +8,7 @@
 {% bootstrap_javascript %}
 
 {% block header %}
-<title>Dataset species analysis</title>
+<title>{% translate "Dataset species analysis" %}</title>
 {% endblock %}
 
 
@@ -17,13 +17,13 @@
 	<ul class="list-group">
 		<li class="list-group-item d-flex justify-content-between align-items-center">
 			<div class="col p-2 px-5">
-				Group
+				{% translate "Group" %}
 			</div>
 			<div class="col p-2 px-5">
-				Count
+				{% translate "Count" %}
 			</div>
 			<div class="col p-2 px-5">
-				Percent
+				{% translate "Percent" %}
 			</div>
 		</li>
 		{% for group in result %}

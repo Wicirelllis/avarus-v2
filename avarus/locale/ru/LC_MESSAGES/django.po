@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-11 10:50+0000\n"
+"POT-Creation-Date: 2024-06-10 16:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,18 @@ msgstr ""
 msgid "Please describe your plans for using the data"
 msgstr "Пожалуйста опишите ваши планы по использованию датасета"
 
+#: apps/feedback/forms.py:11 templates/registration/profile.html:49
+msgid "Name"
+msgstr "Имя"
+
+#: apps/feedback/forms.py:12 templates/registration/profile.html:46
+msgid "Email"
+msgstr "Эл. почта"
+
+#: apps/feedback/forms.py:13
+msgid "Feedback"
+msgstr "Обратная связь"
+
 #: apps/profiles/models.py:7
 msgid "organization"
 msgstr "Организация"
@@ -36,11 +48,11 @@ msgstr "Должность"
 msgid "photo"
 msgstr "Фото"
 
-#: avarus/settings.py:125
+#: avarus/settings.py:126
 msgid "EN"
 msgstr ""
 
-#: avarus/settings.py:126
+#: avarus/settings.py:127
 msgid "RU"
 msgstr ""
 
@@ -202,7 +214,8 @@ msgstr "Связанные проекты"
 msgid "Services"
 msgstr "Сервисы"
 
-#: templates/base.html:65
+#: templates/base.html:65 templates/statistics/statistics.html:7
+#: templates/statistics/statistics.html:16
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -260,6 +273,8 @@ msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
 #: templates/datasets/dataset_detail.html:66
+#: templates/statistics/filter_env_result.html:20
+#: templates/statistics/filter_spp_result.html:20
 msgid "Download"
 msgstr "Скачать"
 
@@ -277,7 +292,7 @@ msgstr "Рельеф"
 
 #: templates/datasets/dataset_detail.html:108
 msgid "Soil texture"
-msgstr ""
+msgstr "Структура почвы"
 
 #: templates/datasets/dataset_detail.html:111
 msgid "Ecotope data"
@@ -296,6 +311,7 @@ msgid "Your request has been sent. We will contact you soon."
 msgstr "Запрос был отправлен. Мы свяжемся с вами."
 
 #: templates/datasets/general_data.html:8
+#: templates/statistics/species_analysis_result.html:20
 msgid "Dataset"
 msgstr "Датасет"
 
@@ -321,11 +337,11 @@ msgstr "Плдзона"
 
 #: templates/datasets/general_data.html:46
 msgid "Permafrost type"
-msgstr "Тип вечной мерзлоты"
+msgstr "Вечная мерзлота (тип)"
 
 #: templates/datasets/general_data.html:49
 msgid "Permafrost data"
-msgstr ""
+msgstr "Вечная мерзлота (данные)"
 
 #: templates/datasets/general_data.html:52
 msgid "Additional data"
@@ -414,14 +430,6 @@ msgstr "Редактировать"
 #: templates/registration/profile.html:43
 msgid "Login"
 msgstr "Логин"
-
-#: templates/registration/profile.html:46
-msgid "Email"
-msgstr "Эл. почта"
-
-#: templates/registration/profile.html:49
-msgid "Name"
-msgstr "Имя"
 
 #: templates/registration/profile.html:52
 msgid "Organization"
@@ -523,3 +531,137 @@ msgstr "Выберите параметры или критереии для а�
 #: templates/services.html:41
 msgid "You can download all the results of the analysis. Good luck!"
 msgstr "Вы сможете загрузить результаты анализа. Удачи"
+
+#: templates/statistics/cluster_analysis.html:11
+#: templates/statistics/cluster_analysis_result.html:11
+#: templates/statistics/cluster_analysis_result.html:19
+#: templates/statistics/statistics.html:44
+msgid "Cluster analysis"
+msgstr "Кластерный анализ"
+
+#: templates/statistics/cluster_analysis_result.html:22
+#: templates/statistics/factor_analysis_result.html:22
+msgid "Coming soon."
+msgstr ""
+
+#: templates/statistics/correlation_analysis.html:11
+#: templates/statistics/correlation_analysis_result.html:11
+#: templates/statistics/correlation_analysis_result.html:19
+#: templates/statistics/statistics.html:23
+msgid "Correlation analysis"
+msgstr "Корреляционный анализ"
+
+#: templates/statistics/correlation_analysis_result.html:22
+#, fuzzy
+#| msgid "Correlation analysis"
+msgid "Correlation"
+msgstr "Корреляционный анализ"
+
+#: templates/statistics/correlation_analysis_result.html:24
+msgid "p-value"
+msgstr "p-значение"
+
+#: templates/statistics/dataset_species_analysis.html:11
+#: templates/statistics/dataset_species_analysis_result.html:11
+#, fuzzy
+#| msgid "Dataset requests"
+msgid "Dataset species analysis"
+msgstr "Мои заявки"
+
+#: templates/statistics/dataset_species_analysis_result.html:20
+msgid "Group"
+msgstr "Группа"
+
+#: templates/statistics/dataset_species_analysis_result.html:23
+#: templates/statistics/species_analysis_result.html:23
+msgid "Count"
+msgstr "Количество"
+
+#: templates/statistics/dataset_species_analysis_result.html:26
+#: templates/statistics/species_analysis_result.html:26
+msgid "Percent"
+msgstr "Процент"
+
+#: templates/statistics/factor_analysis.html:11
+#: templates/statistics/factor_analysis_result.html:11
+#: templates/statistics/factor_analysis_result.html:19
+#: templates/statistics/statistics.html:37
+msgid "Factor analysis"
+msgstr "Факторный анализ"
+
+#: templates/statistics/filter_env.html:11
+#: templates/statistics/filter_env_result.html:11
+#: templates/statistics/statistics.html:60
+msgid "Filter env"
+msgstr ""
+
+#: templates/statistics/filter_env_result.html:17
+#: templates/statistics/filter_spp_result.html:17
+msgid "Processing complete."
+msgstr "Обработка завершениа."
+
+#: templates/statistics/filter_env_result.html:18
+#: templates/statistics/filter_spp_result.html:18
+#, fuzzy
+#| msgid "You can download all the results of the analysis. Good luck!"
+msgid "You may download the result below."
+msgstr "Вы сможете загрузить результаты анализа. Удачи"
+
+#: templates/statistics/filter_spp.html:11
+#: templates/statistics/filter_spp_result.html:11
+#: templates/statistics/statistics.html:53
+msgid "Filter spp"
+msgstr ""
+
+#: templates/statistics/pca_analysis.html:11
+#: templates/statistics/pca_analysis_result.html:11
+#: templates/statistics/pca_analysis_result.html:19
+#: templates/statistics/statistics.html:30
+msgid "Principal component analysis"
+msgstr "Метод главных компонент"
+
+#: templates/statistics/snippets/form_page.html:19
+msgid "Back"
+msgstr "Назад"
+
+#: templates/statistics/snippets/form_page.html:20
+#: templates/statistics/statistics.html:25
+#: templates/statistics/statistics.html:32
+#: templates/statistics/statistics.html:39
+#: templates/statistics/statistics.html:46
+#: templates/statistics/statistics.html:55
+#: templates/statistics/statistics.html:62
+#: templates/statistics/statistics.html:71
+#: templates/statistics/statistics.html:78
+msgid "Continue"
+msgstr "Далее"
+
+#: templates/statistics/snippets/form_page.html:33
+msgid "Please, select an option in the form."
+msgstr "Пожалуйста, выберите по крайней мере один из вариантов."
+
+#: templates/statistics/species_analysis.html:11
+#: templates/statistics/species_analysis_result.html:11
+#: templates/statistics/statistics.html:17
+msgid "Species analysis"
+msgstr "Видовой анализ"
+
+#: templates/statistics/statistics.html:15
+msgid "Analytics"
+msgstr "Аналитика"
+
+#: templates/statistics/statistics.html:69
+msgid "Species analysis (by group)"
+msgstr "Видовой анализ (группа)"
+
+#: templates/statistics/statistics.html:76
+msgid "Species analysis (by dataset)"
+msgstr "Видовой анализ (датасет)"
+
+#~ msgid "name"
+#~ msgstr "имя"
+
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "email"
+#~ msgstr "Эл. почта"
