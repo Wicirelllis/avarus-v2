@@ -1,6 +1,6 @@
 from apps.datasets.models import Dataset
 from apps.statistics.forms import ChoiceFieldForm, MultipleChoiceFieldForm
-from apps.statistics.statistics import correlation_analysis
+from apps.statistics.statistics import correlation_analysis, pca_analysis, factor_analysis, cluster_analysis
 from apps.statistics.utils import (_choices, _get_available_datasets,
                                    _get_env_df_by_id, _get_spp_df_by_id)
 from django import forms
@@ -20,7 +20,7 @@ def correlation_analysis_view(request):
     def _make_form_cols(data = None):
         id = request.session['correlation_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = _choices(dataset.get_spp_cols())
+        choices_data = _choices(dataset.get_spp_cols(True, True))
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -50,6 +50,134 @@ def correlation_analysis_result_view(request):
     cols = params['cols']
     result = correlation_analysis(df, cols)
     return render(request, 'statistics/correlation_analysis_result.html', {'result': result})
+
+
+
+def pca_analysis_view(request):
+    def _make_form_dataset(data = None):
+        datasets = _get_available_datasets(request.user)
+        choices = _choices(datasets)
+        return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
+
+    def _make_form_cols(data = None):
+        id = request.session['pca_analysis']['dataset_id']
+        dataset = Dataset.objects.filter(id=id).first()
+        choices_data = _choices(dataset.get_spp_cols(True, True))
+        return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
+
+    if request.method == 'POST':
+        if 'dataset' in request.POST:
+            form_dataset = _make_form_dataset(request.POST)
+            if form_dataset.is_valid():
+                request.session['pca_analysis'].update({'dataset_id': request.POST['dataset']})
+                form_cols = _make_form_cols()
+                return render(request, 'statistics/pca_analysis.html', {'form': form_cols})
+            else:
+                return render(request, 'statistics/pca_analysis.html', {'form': form_dataset})
+        if 'cols' in request.POST:
+            form_cols = _make_form_cols(request.POST)
+            if form_cols.is_valid():
+                request.session['pca_analysis'].update({'cols': request.POST.getlist('cols')})
+                return redirect('pca-analysis-result')
+            else:
+                return render(request, 'statistics/pca_analysis.html', {'form': form_cols})
+    else:
+        request.session['pca_analysis'] = {}
+        form_dataset = _make_form_dataset()
+        return render(request, 'statistics/pca_analysis.html', {'form': form_dataset})
+
+def pca_analysis_result_view(request):
+    params = request.session.get('pca_analysis')
+    df = _get_spp_df_by_id(params['dataset_id'])
+    cols = params['cols']
+    result = pca_analysis(df, cols)
+    return render(request, 'statistics/pca_analysis_result.html', {'result': result})
+
+
+
+def factor_analysis_view(request):
+    def _make_form_dataset(data = None):
+        datasets = _get_available_datasets(request.user)
+        choices = _choices(datasets)
+        return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
+
+    def _make_form_cols(data = None):
+        id = request.session['factor_analysis']['dataset_id']
+        dataset = Dataset.objects.filter(id=id).first()
+        choices_data = _choices(dataset.get_spp_cols())
+        return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
+
+    if request.method == 'POST':
+        if 'dataset' in request.POST:
+            form_dataset = _make_form_dataset(request.POST)
+            if form_dataset.is_valid():
+                request.session['factor_analysis'].update({'dataset_id': request.POST['dataset']})
+                form_cols = _make_form_cols()
+                return render(request, 'statistics/factor_analysis.html', {'form': form_cols})
+            else:
+                return render(request, 'statistics/factor_analysis.html', {'form': form_dataset})
+        if 'cols' in request.POST:
+            form_cols = _make_form_cols(request.POST)
+            if form_cols.is_valid():
+                request.session['factor_analysis'].update({'cols': request.POST.getlist('cols')})
+                return redirect('factor-analysis-result')
+            else:
+                return render(request, 'statistics/factor_analysis.html', {'form': form_cols})
+    else:
+        request.session['factor_analysis'] = {}
+        form_dataset = _make_form_dataset()
+        return render(request, 'statistics/factor_analysis.html', {'form': form_dataset})
+
+def factor_analysis_result_view(request):
+    params = request.session.get('factor_analysis')
+    df = _get_spp_df_by_id(params['dataset_id'])
+    cols = params['cols']
+    result = factor_analysis(df, cols)
+    return render(request, 'statistics/factor_analysis_result.html', {'result': result})
+
+
+
+def cluster_analysis_view(request):
+    def _make_form_dataset(data = None):
+        datasets = _get_available_datasets(request.user)
+        choices = _choices(datasets)
+        return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
+
+    def _make_form_cols(data = None):
+        id = request.session['cluster_analysis']['dataset_id']
+        dataset = Dataset.objects.filter(id=id).first()
+        choices_data = _choices(dataset.get_spp_cols())
+        return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
+
+    if request.method == 'POST':
+        if 'dataset' in request.POST:
+            form_dataset = _make_form_dataset(request.POST)
+            if form_dataset.is_valid():
+                request.session['cluster_analysis'].update({'dataset_id': request.POST['dataset']})
+                form_cols = _make_form_cols()
+                return render(request, 'statistics/cluster_analysis.html', {'form': form_cols})
+            else:
+                return render(request, 'statistics/cluster_analysis.html', {'form': form_dataset})
+        if 'cols' in request.POST:
+            form_cols = _make_form_cols(request.POST)
+            if form_cols.is_valid():
+                request.session['cluster_analysis'].update({'cols': request.POST.getlist('cols')})
+                return redirect('cluster-analysis-result')
+            else:
+                return render(request, 'statistics/cluster_analysis.html', {'form': form_cols})
+    else:
+        request.session['cluster_analysis'] = {}
+        form_dataset = _make_form_dataset()
+        return render(request, 'statistics/cluster_analysis.html', {'form': form_dataset})
+
+def cluster_analysis_result_view(request):
+    params = request.session.get('cluster_analysis')
+    df = _get_spp_df_by_id(params['dataset_id'])
+    cols = params['cols']
+    result = cluster_analysis(df, cols)
+    return render(request, 'statistics/cluster_analysis_result.html', {'result': result})
+
+
 
 
 def filter_spp_view(request):
@@ -106,7 +234,7 @@ def filter_env_view(request):
     def _make_form_col(data=None):
         dataset_id = request.session['filter_env']['dataset_id']
         dataset = Dataset.objects.filter(id=dataset_id).first()
-        choices = _choices(dataset.get_env_cols())
+        choices = _choices(dataset.get_env_cols(True))
         return ChoiceFieldForm(data, field='col', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_values(data = None):

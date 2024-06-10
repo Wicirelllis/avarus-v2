@@ -63,23 +63,28 @@ class Dataset(models.Model):
     species_vascular = models.IntegerField(default=0)
     species_unknown = models.IntegerField(default=0)
 
-    def get_col_names(self):
-        return _read_spp(self.spp.path).columns.values
 
     def get_spp_rows(self):
         return _read_spp(self.spp.path)['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)']
 
-    def get_spp_cols(self):
-        return _read_spp(self.spp.path).columns.values
+    def get_spp_cols(self, drop_na: bool = False, numeric: bool = False):
+        df = _read_spp(self.spp.path)
+        if drop_na:
+            df.dropna(axis=1, how='all', inplace=True)
+        if numeric:
+            return df.select_dtypes('number').columns.values
+        return df.columns.values
 
     def get_env_rows(self):
         return _read_env(self.env.path)['FIELD_NR']
 
-    def get_env_cols(self):
-        return _read_env(self.env.path).columns.values
-
-    def get_env_numeric_cols(self):
-        return _read_env(self.env.path).columns.values
+    def get_env_cols(self, drop_na: bool = False, numeric: bool = False):
+        df = _read_env(self.env.path)
+        if drop_na:
+            df.dropna(axis=1, how='all', inplace=True)
+        if numeric:
+            return df.select_dtypes('number').columns.values
+        return df.columns.values
 
     def get_env_col_values(self, col: str) -> set:
         return set(_read_env(self.env.path)[col])
