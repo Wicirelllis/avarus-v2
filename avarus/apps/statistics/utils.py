@@ -7,7 +7,10 @@ from django.db.models.query import QuerySet
 
 
 def _get_available_datasets(user):
-    return Dataset.objects.filter(status='pu').distinct() | Dataset.objects.filter(available_to=user).distinct()
+    return (
+        Dataset.objects.filter(status='pu').exclude(in_preparation=True).distinct() |
+        Dataset.objects.filter(available_to=user).exclude(in_preparation=True).distinct()
+    )
 
 
 def _choices(iter: QuerySet | Iterable[str], sort: bool = True) -> tuple[str, str]:

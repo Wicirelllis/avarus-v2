@@ -16,9 +16,11 @@ LOAN_STATUS = (
 class Dataset(models.Model):
     title = models.CharField(max_length=200)
     summary = models.TextField(help_text="A brief description of the dataset.", blank=True)
+    number = models.IntegerField(help_text='A number/id of the dataset that is used in goold-drive and other places.', blank=True, null=True)
+    in_preparation = models.BooleanField(help_text='Dataset in preparation is just a template without data.', default=False)
 
-    env = models.FileField(upload_to='datasets/env/', validators=[env_validator])
-    spp = models.FileField(upload_to='datasets/spp/', validators=[spp_validator])
+    env = models.FileField(upload_to='datasets/env/', validators=[env_validator], default='datasets/env/blank.xlsx', blank=True)
+    spp = models.FileField(upload_to='datasets/spp/', validators=[spp_validator], default='datasets/spp/blank.xlsx', blank=True)
     image = models.ImageField(upload_to='datasets/img/', blank=True)
     download_url = models.URLField('Download link', blank=True)
 
@@ -91,7 +93,10 @@ class Dataset(models.Model):
 
 
     def __str__(self):
-        return self.title
+        if self.number:
+            return f'{self.number}. {self.title}'
+        else:
+            return self.title
 
     def get_absolute_url(self):
         return reverse('dataset-detail', args=[str(self.id)])
@@ -126,7 +131,8 @@ class Dataset(models.Model):
             'species_vascular',
             'species_unknown',
         ]
-        ParseDataset(self).fill_fields(fields)
+        if not self.in_preparation:
+            ParseDataset(self).fill_fields(fields)
         super(Dataset, self).save(*args, **kwargs)
 
 

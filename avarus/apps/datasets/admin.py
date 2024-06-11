@@ -10,8 +10,10 @@ class DatasetAdmin(admin.ModelAdmin):
             {
                 'description': 'Main fields. While they are optional it is recommended to fill them.',
                 'fields': [
+                    'in_preparation',
                     'title',
                     'summary',
+                    'number',
                     'env',
                     'spp',
                     'download_url',
