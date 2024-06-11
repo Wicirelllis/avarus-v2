@@ -39,57 +39,61 @@
                             <p><strong>{% translate "Number of plots" %}:</strong> {{ dataset.n_plots|default_if_none:"&mdash;" }}</p>
                         </div>
                         <div class="card-footer">
-                            {% if not user.is_authenticated %}
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
-                                    {% translate "Request access" %}
-                                </button>
-                                <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="d-flex justify-content-center">
-                                                    {% translate "Please" %} &nbsp;<a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">{% translate "Log In" %}</a>
-                                                </div>
-                                                <div class="d-flex justify-content-center">
-                                                    {% translate "Don't have an account?" %} &nbsp;<a href="{% url 'register' %}?next={{ request.get_full_path|urlencode }}">{% translate "Sign Up" %}</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% elif dataset.status == 'pu' or user in dataset.available_to.all %}
-                                {% if dataset.download_url %}
-                                    <a class="btn btn-primary" href="{{ dataset.download_url }}" target="_blank">{% translate "Download" %}</a>
-                                {% else %}
-                                    {% translate "Dataset is currently unavailable." %}
-                                {% endif %}
+                            {% if dataset.in_preparation %}
+                                {% translate "Dataset is in preparation. It will be available in the future." %}
                             {% else %}
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
-                                    {% translate "Request access" %}
-                                </button>
-                                <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{% url 'dataset-request-form' %}" method="post">
-                                                    {% csrf_token %}
-                                                    {% bootstrap_form request_form %}
+                                {% if not user.is_authenticated %}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+                                        {% translate "Request access" %}
+                                    </button>
+                                    <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
                                                     <div class="d-flex justify-content-center">
-                                                        <button type="submit" class="btn btn-success">{% translate "Submit" %}</button>
+                                                        {% translate "Please" %} &nbsp;<a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">{% translate "Log In" %}</a>
                                                     </div>
-                                                </form>
+                                                    <div class="d-flex justify-content-center">
+                                                        {% translate "Don't have an account?" %} &nbsp;<a href="{% url 'register' %}?next={{ request.get_full_path|urlencode }}">{% translate "Sign Up" %}</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                {% elif dataset.status == 'pu' or user in dataset.available_to.all %}
+                                    {% if dataset.download_url %}
+                                        <a class="btn btn-primary" href="{{ dataset.download_url }}" target="_blank">{% translate "Download" %}</a>
+                                    {% else %}
+                                        {% translate "Dataset is currently unavailable." %}
+                                    {% endif %}
+                                {% else %}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+                                        {% translate "Request access" %}
+                                    </button>
+                                    <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="requestModalLabel">{% translate "Request access" %}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{% url 'dataset-request-form' %}" method="post">
+                                                        {% csrf_token %}
+                                                        {% bootstrap_form request_form %}
+                                                        <div class="d-flex justify-content-center">
+                                                            <button type="submit" class="btn btn-success">{% translate "Submit" %}</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
