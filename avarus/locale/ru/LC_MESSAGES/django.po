@@ -58,7 +58,7 @@ msgstr ""
 
 #: templates/about.html:21
 msgid "The Arctic Vegetation Archive (AVA)"
-msgstr ""
+msgstr "Архив растительности Арктики"
 
 #: templates/about.html:22
 msgid ""
@@ -296,15 +296,15 @@ msgstr "Структура почвы"
 
 #: templates/datasets/dataset_detail.html:111
 msgid "Ecotope data"
-msgstr ""
+msgstr "Характеристики местообитаний"
 
 #: templates/datasets/dataset_detail.html:114
 msgid "Phytocoenosis data"
-msgstr ""
+msgstr "Характеристики растительности"
 
 #: templates/datasets/dataset_detail.html:118
 msgid "Disturbance"
-msgstr ""
+msgstr "Нарушения"
 
 #: templates/datasets/dataset_request_done.html:19
 msgid "Your request has been sent. We will contact you soon."
@@ -317,7 +317,7 @@ msgstr "Датасет"
 
 #: templates/datasets/general_data.html:24
 msgid "Coverscale"
-msgstr ""
+msgstr "Шкала проективного покрытия"
 
 #: templates/datasets/general_data.html:27
 msgid "Key site coordinates"
@@ -325,7 +325,7 @@ msgstr "Координаты"
 
 #: templates/datasets/general_data.html:34
 msgid "Plots geotagged"
-msgstr ""
+msgstr "Участков с координатами"
 
 #: templates/datasets/general_data.html:40
 msgid "Location"
@@ -361,11 +361,11 @@ msgstr "Идентифицировано лишайников"
 
 #: templates/datasets/general_data.html:64
 msgid "Vascular plant taxonomic quality"
-msgstr ""
+msgstr "Качество определения видов семенных растений"
 
 #: templates/datasets/general_data.html:67
 msgid "Cryptogam taxonomic quality"
-msgstr ""
+msgstr "Качество определения видов споровых растений"
 
 #: templates/feedback/feedback_done.html:19
 msgid "Thank you for your feedback."
@@ -542,7 +542,7 @@ msgstr "Кластерный анализ"
 #: templates/statistics/cluster_analysis_result.html:22
 #: templates/statistics/factor_analysis_result.html:22
 msgid "Coming soon."
-msgstr ""
+msgstr "Будет в ближайшем будущем."
 
 #: templates/statistics/correlation_analysis.html:11
 #: templates/statistics/correlation_analysis_result.html:11
