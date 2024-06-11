@@ -1,7 +1,7 @@
 from apps.authors.models import Author
 from apps.datasets.parse import ParseDataset
 from apps.datasets.utils import _read_env, _read_spp
-from apps.datasets.validators import env_validator
+from apps.datasets.validators import env_validator, spp_validator
 from apps.publications.models import Publication
 from django.contrib.auth.models import User
 from django.db import models
@@ -18,7 +18,7 @@ class Dataset(models.Model):
     summary = models.TextField(help_text="A brief description of the dataset.", blank=True)
 
     env = models.FileField(upload_to='datasets/env/', validators=[env_validator])
-    spp = models.FileField(upload_to='datasets/spp/', blank=True)
+    spp = models.FileField(upload_to='datasets/spp/', validators=[spp_validator])
     image = models.ImageField(upload_to='datasets/img/', blank=True)
     download_url = models.URLField('Download link', blank=True)
 
