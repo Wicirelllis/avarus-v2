@@ -16,7 +16,7 @@
         </h3>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                {% for dataset in datasets %}
+                {% for dataset in datasets|dictsort:"number" %}
                     <li class="list-group-item">
                         <a href="{{ dataset.get_absolute_url }}">{{ dataset }}</a>
                         &mdash;

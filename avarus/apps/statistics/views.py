@@ -1,8 +1,8 @@
 from apps.datasets.models import Dataset
 from apps.statistics.forms import ChoiceFieldForm, MultipleChoiceFieldForm
 from apps.statistics.statistics import correlation_analysis, pca_analysis, factor_analysis, cluster_analysis
-from apps.statistics.utils import (_choices, _get_available_datasets,
-                                   _get_env_df_by_id, _get_spp_df_by_id)
+from apps.statistics.utils import (make_choices, get_available_datasets,
+                                   get_env_df_by_id, get_spp_df_by_id)
 from django import forms
 from django.shortcuts import redirect, render
 
@@ -13,14 +13,14 @@ def StatisticsView(request):
 
 def correlation_analysis_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_cols(data = None):
         id = request.session['correlation_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = _choices(dataset.get_spp_cols(True, True))
+        choices_data = make_choices(dataset.get_spp_cols(True, True))
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def correlation_analysis_view(request):
 
 def correlation_analysis_result_view(request):
     params = request.session.get('correlation_analysis')
-    df = _get_spp_df_by_id(params['dataset_id'])
+    df = get_spp_df_by_id(params['dataset_id'])
     cols = params['cols']
     result = correlation_analysis(df, cols)
     return render(request, 'statistics/correlation_analysis_result.html', {'result': result})
@@ -55,14 +55,14 @@ def correlation_analysis_result_view(request):
 
 def pca_analysis_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_cols(data = None):
         id = request.session['pca_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = _choices(dataset.get_spp_cols(True, True))
+        choices_data = make_choices(dataset.get_spp_cols(True, True))
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -88,7 +88,7 @@ def pca_analysis_view(request):
 
 def pca_analysis_result_view(request):
     params = request.session.get('pca_analysis')
-    df = _get_spp_df_by_id(params['dataset_id'])
+    df = get_spp_df_by_id(params['dataset_id'])
     cols = params['cols']
     result = pca_analysis(df, cols)
     return render(request, 'statistics/pca_analysis_result.html', {'result': result})
@@ -97,14 +97,14 @@ def pca_analysis_result_view(request):
 
 def factor_analysis_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_cols(data = None):
         id = request.session['factor_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = _choices(dataset.get_spp_cols())
+        choices_data = make_choices(dataset.get_spp_cols())
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -130,7 +130,7 @@ def factor_analysis_view(request):
 
 def factor_analysis_result_view(request):
     params = request.session.get('factor_analysis')
-    df = _get_spp_df_by_id(params['dataset_id'])
+    df = get_spp_df_by_id(params['dataset_id'])
     cols = params['cols']
     result = factor_analysis(df, cols)
     return render(request, 'statistics/factor_analysis_result.html', {'result': result})
@@ -139,14 +139,14 @@ def factor_analysis_result_view(request):
 
 def cluster_analysis_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_cols(data = None):
         id = request.session['cluster_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = _choices(dataset.get_spp_cols())
+        choices_data = make_choices(dataset.get_spp_cols())
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -172,7 +172,7 @@ def cluster_analysis_view(request):
 
 def cluster_analysis_result_view(request):
     params = request.session.get('cluster_analysis')
-    df = _get_spp_df_by_id(params['dataset_id'])
+    df = get_spp_df_by_id(params['dataset_id'])
     cols = params['cols']
     result = cluster_analysis(df, cols)
     return render(request, 'statistics/cluster_analysis_result.html', {'result': result})
@@ -182,14 +182,14 @@ def cluster_analysis_result_view(request):
 
 def filter_spp_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_rows(data = None):
         id = request.session['filter_spp']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices = _choices(dataset.get_spp_rows())
+        choices = make_choices(dataset.get_spp_rows())
         return MultipleChoiceFieldForm(data, field='rows', choices=choices, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -215,7 +215,7 @@ def filter_spp_view(request):
     
 def filter_spp_result_view(request):
     params = request.session.get('filter_spp')
-    df = _get_spp_df_by_id(params['dataset_id'])
+    df = get_spp_df_by_id(params['dataset_id'])
     rows: list[str] = params['rows']
 
     result = df.loc[df['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(rows)]
@@ -227,21 +227,21 @@ def filter_spp_result_view(request):
 
 def filter_env_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
     
     def _make_form_col(data=None):
         dataset_id = request.session['filter_env']['dataset_id']
         dataset = Dataset.objects.filter(id=dataset_id).first()
-        choices = _choices(dataset.get_env_cols(True))
+        choices = make_choices(dataset.get_env_cols(True))
         return ChoiceFieldForm(data, field='col', choices=choices, widget=forms.RadioSelect)
 
     def _make_form_values(data = None):
         dataset_id = request.session['filter_env']['dataset_id']
         dataset = Dataset.objects.filter(id=dataset_id).first()
         col = request.session['filter_env']['col']
-        choices = _choices(dataset.get_env_col_values(col))
+        choices = make_choices(dataset.get_env_col_values(col))
         return MultipleChoiceFieldForm(data, field='values', choices=choices, widget=forms.CheckboxSelectMultiple)
     
     if request.method == 'POST':
@@ -275,7 +275,7 @@ def filter_env_view(request):
 
 def filter_env_result_view(request):
     params = request.session.get('filter_env')
-    df = _get_env_df_by_id(params['dataset_id'])
+    df = get_env_df_by_id(params['dataset_id'])
     col = params['col']
     values = params['values']
 
@@ -330,8 +330,8 @@ def species_analysis_result_view(request):
 
 def dataset_species_analysis_view(request):
     def _make_form_dataset(data = None):
-        datasets = _get_available_datasets(request.user)
-        choices = _choices(datasets)
+        datasets = get_available_datasets(request.user)
+        choices = make_choices(datasets)
         return ChoiceFieldForm(data, field='dataset', choices=choices, widget=forms.RadioSelect)
     
     if request.method == 'POST':

@@ -5,7 +5,7 @@ import dateutil
 import numpy as np
 import pandas as pd
 from apps.datasets import species
-from apps.datasets.utils import _read_env, _read_spp
+from apps.datasets.utils import read_env, read_spp
 from django.utils.translation import gettext_lazy as _
 
 
@@ -28,8 +28,8 @@ def _translate(data: list | dict, table: dict) -> list | dict:
 class ParseDataset:
     def __init__(self, dataset) -> None:
         self.dataset = dataset
-        self.df: pd.DataFrame = self._read_env_excel()
-        self.spp: pd.DataFrame = _read_spp(dataset.spp.path)
+        self.df: pd.DataFrame = read_env(dataset.env.path)
+        self.spp: pd.DataFrame = read_spp(dataset.spp.path)
         self._fix_header()
 
     def fill_fields(self, fields: list[str]):
@@ -38,17 +38,6 @@ class ParseDataset:
             if not getattr(self.dataset, field):
                 with suppress(Exception):
                     setattr(self.dataset, field, getattr(self, f'_get_{field}')())
-
-    def _read_env_excel(self) -> pd.DataFrame:
-        ''' Read an env excel file into a pandas dataframe '''
-        path = self.dataset.env.path
-        df = pd.read_excel(path, header=None, dtype={'REGION': str})
-        for row_idx in range(df.shape[0]):
-            if df.iloc[row_idx, 0] == 'RELEVE_NR':
-                new_header = df.iloc[row_idx]
-                df = df[row_idx + 1:]
-                df.columns = new_header
-                return df
 
     def _fix_header(self):
         ''' Rename column names for consistency '''

@@ -1,6 +1,6 @@
 from apps.authors.models import Author
 from apps.datasets.parse import ParseDataset
-from apps.datasets.utils import _read_env, _read_spp
+from apps.datasets.utils import read_env, read_spp
 from apps.datasets.validators import env_validator, spp_validator
 from apps.publications.models import Publication
 from django.contrib.auth.models import User
@@ -41,7 +41,7 @@ class Dataset(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     geotagged = models.CharField(max_length=200, blank=True, help_text='')
     region = models.CharField(max_length=200, blank=True, help_text='')
-    location = models.CharField(max_length=200, blank=True, help_text='')
+    location = models.TextField(blank=True, help_text='')
     subzone = models.CharField(max_length=200, blank=True, help_text='')
     mosses = models.CharField(max_length=200, blank=True, help_text='')
     liverworts = models.CharField(max_length=200, blank=True, help_text='')
@@ -67,10 +67,10 @@ class Dataset(models.Model):
 
 
     def get_spp_rows(self):
-        return _read_spp(self.spp.path)['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)']
+        return read_spp(self.spp.path)['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)']
 
     def get_spp_cols(self, drop_na: bool = False, numeric: bool = False):
-        df = _read_spp(self.spp.path)
+        df = read_spp(self.spp.path)
         if drop_na:
             df.dropna(axis=1, how='all', inplace=True)
         if numeric:
@@ -78,10 +78,10 @@ class Dataset(models.Model):
         return df.columns.values
 
     def get_env_rows(self):
-        return _read_env(self.env.path)['FIELD_NR']
+        return read_env(self.env.path)['FIELD_NR']
 
     def get_env_cols(self, drop_na: bool = False, numeric: bool = False):
-        df = _read_env(self.env.path)
+        df = read_env(self.env.path)
         if drop_na:
             df.dropna(axis=1, how='all', inplace=True)
         if numeric:
@@ -89,7 +89,7 @@ class Dataset(models.Model):
         return df.columns.values
 
     def get_env_col_values(self, col: str) -> set:
-        return set(_read_env(self.env.path)[col])
+        return set(read_env(self.env.path)[col])
 
 
     def __str__(self):
