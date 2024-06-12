@@ -6,8 +6,10 @@ from apps.feedback.forms import FeedbackForm
 
 def HomeView(request):
     locations = MapLocation.objects.all()
-    data = [dict()]
+    data = []
     for loc in locations:
+        if loc.dataset.in_preparation or not (loc.dataset.latitude and loc.dataset.longitude):
+            continue
         placemark = {
             'center': [loc.dataset.latitude, loc.dataset.longitude],
             'name': f'{loc.name}',
@@ -16,7 +18,7 @@ def HomeView(request):
             'ContentFooter': [f'{loc.dataset.n_plots} plots'],
             'hint': [f'{loc.name}'],
         }
-        data.insert(0, placemark)
+        data.append(placemark)
 
     json_data = dumps(data)
     return render(request, 'home.html', {'json_data': json_data, 'locations': locations})

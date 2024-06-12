@@ -321,10 +321,12 @@ class ParseDataset:
 
     def _get_latitude(self):
         data = self.df['LATITUDE'].astype(float)
+        data = data[abs(data) > 0.001]
         return (np.max(data) + np.min(data)) / 2.
 
     def _get_longitude(self):
         data = self.df['LONGITUDE'].astype(float)
+        data = data[abs(data) > 0.001]
         return (np.max(data) + np.min(data)) / 2.
 
     def _get_species_total(self):

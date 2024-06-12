@@ -8,7 +8,7 @@ from django.conf import settings
 
 
 def DatasetsView(request):
-    datasets = Dataset.objects.all()
+    datasets = Dataset.objects.all().order_by('number')
     return render(request, 'datasets/datasets.html', {'datasets': datasets})
 
 class DatasetDetailView(generic.DetailView):
