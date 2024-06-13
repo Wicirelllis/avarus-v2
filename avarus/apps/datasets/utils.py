@@ -19,7 +19,7 @@ def read_env(path: str) -> pd.DataFrame:
     for row_idx in range(df.shape[0]):
         if (df.iloc[row_idx] == 'FIELD_NR').any():
             header = df.iloc[row_idx]
-            return _read_file(path, skiprows=row_idx+1, names=header)
+            return _read_file(path, skiprows=row_idx, names=header)
 
 
 def read_spp(path: str) -> pd.DataFrame:
@@ -31,4 +31,4 @@ def read_spp(path: str) -> pd.DataFrame:
             if 'AUTHOR PLOT NUMBER' in df.values:
                 header_vals = df[df.isin(["AUTHOR PLOT NUMBER"]).any(axis=1)].squeeze()
                 header.fillna(header_vals, inplace=True)
-            return _read_file(path, skiprows=row_idx+1, names=header).fillna(0).convert_dtypes()
+            return _read_file(path, skiprows=row_idx, names=header).fillna(0).convert_dtypes()

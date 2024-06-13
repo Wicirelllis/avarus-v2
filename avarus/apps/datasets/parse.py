@@ -203,7 +203,7 @@ class ParseDataset:
 
     # regular data description fields
     def _get_n_plots(self):
-        return len(self.df.loc[:, 'SOIL_TEXT'])
+        return len(self.df)
 
     def _get_year(self):
         return int(np.floor(self.df['DATE'].apply(lambda x: dateutil.parser.parse(str(x)).year).mean()))
