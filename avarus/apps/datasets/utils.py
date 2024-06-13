@@ -24,7 +24,7 @@ def read_env(path: str) -> pd.DataFrame:
 
 def read_spp(path: str) -> pd.DataFrame:
     ''' Read an env excel file into a pandas dataframe '''
-    df = _read_file(path, header=None)
+    df = _read_file(path, header=None, na_values=[0, 0.])
     for row_idx in range(df.shape[0]):
         if (df.iloc[row_idx] == 'PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)').any():
             header = df.iloc[row_idx]

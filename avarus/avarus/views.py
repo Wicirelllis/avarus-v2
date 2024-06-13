@@ -3,6 +3,8 @@ from json import dumps
 from apps.map_locations.models import MapLocation
 from django.shortcuts import render
 from apps.feedback.forms import FeedbackForm
+from django.conf import settings
+
 
 def HomeView(request):
     locations = MapLocation.objects.all()
@@ -21,7 +23,7 @@ def HomeView(request):
         data.append(placemark)
 
     json_data = dumps(data)
-    return render(request, 'home.html', {'json_data': json_data, 'locations': locations})
+    return render(request, 'home.html', {'json_data': json_data, 'locations': locations, 'ya_maps_token': settings.YANDEX_MAPS_TOKEN})
 
 def AboutView(request):
     ctx = {'feedback_form': FeedbackForm()}
