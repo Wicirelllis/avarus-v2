@@ -231,7 +231,7 @@ class ParseDataset:
         }
         vals = self.df['COVERSCALE'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
         vals = [str(s).zfill(2) for s in vals]
-        return ','.join(_translate(vals, table))
+        return '; '.join(_translate(vals, table))
 
     def _get_region(self):
         table = {
@@ -265,12 +265,12 @@ class ParseDataset:
         }
         vals = self.df['REGION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
         vals = [str(s).zfill(3) for s in vals]
-        return ','.join(_translate(vals, table))
+        return '; '.join(_translate(vals, table))
 
     def _get_location(self):
         vals = self.df['LOCATION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
         vals = [str(s).zfill(3) for s in vals]
-        return ', '.join(vals)
+        return '; '.join(vals)
     
     def _get_subzone(self):
         table = {
@@ -284,7 +284,7 @@ class ParseDataset:
             'BO': 'Boreal',
         }
         val_counts = _get_val_counts(self.df, 'SUBZONE')
-        return ','.join(_translate(val_counts, table).keys())
+        return '; '.join(_translate(val_counts, table).keys())
 
     def _get_mosses(self):
         val_counts = _get_val_counts(self.df, 'MOSS_IDENT')
