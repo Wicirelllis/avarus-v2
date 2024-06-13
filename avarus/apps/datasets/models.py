@@ -40,7 +40,7 @@ class Dataset(models.Model):
     longitude = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     geotagged = models.CharField(max_length=200, blank=True, help_text='')
-    region = models.CharField(max_length=200, blank=True, help_text='')
+    region = models.TextField(blank=True, help_text='')
     location = models.TextField(blank=True, help_text='')
     subzone = models.CharField(max_length=200, blank=True, help_text='')
     mosses = models.CharField(max_length=200, blank=True, help_text='')

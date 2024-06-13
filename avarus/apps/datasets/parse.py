@@ -229,8 +229,9 @@ class ParseDataset:
             '98': 'Numbers (<65025)',
             '99': 'Numbers (<24000)',
         }
-        val_counts = _get_val_counts(self.df, 'COVERSCALE')
-        return ','.join(_translate(val_counts, table).keys())
+        vals = self.df['COVERSCALE'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
+        vals = [str(s).zfill(2) for s in vals]
+        return ','.join(_translate(vals, table))
 
     def _get_region(self):
         table = {
@@ -262,12 +263,14 @@ class ParseDataset:
             '025': 'Canadian Arctic Archipelago',
             '026': 'Mainland Northwest Territories, Canada',
         }
-        val_counts = _get_val_counts(self.df, 'REGION')
-        return ','.join(_translate(val_counts, table).keys())
+        vals = self.df['REGION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
+        vals = [str(s).zfill(3) for s in vals]
+        return ','.join(_translate(vals, table))
 
     def _get_location(self):
-        val_counts = _get_val_counts(self.df, 'LOCATION')
-        return ', '.join(val_counts.keys())
+        vals = self.df['LOCATION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
+        vals = [str(s).zfill(3) for s in vals]
+        return ', '.join(vals)
     
     def _get_subzone(self):
         table = {
