@@ -25,6 +25,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://avarus.space']
 
 # Application definition
 
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'avarus.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'postgres_db',
+        'HOST': 'postgres19001-v2',
         'NAME': _read_env_str('POSTGRES_DB'),
         'PASSWORD': _read_env_str('POSTGRES_PASSWORD'),
         'PORT': '5432',
