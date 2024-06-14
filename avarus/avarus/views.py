@@ -14,11 +14,11 @@ def HomeView(request):
             continue
         placemark = {
             'center': [loc.dataset.latitude, loc.dataset.longitude],
-            'name': loc.name,
+            'name': str(loc.dataset),
             'ContentHeader': [f'<a href="{loc.dataset.get_absolute_url()}">{loc.dataset}</a><br>{', '.join(a.get_short_name() for a in loc.dataset.authors.all())}, {loc.dataset.year}<hr>'],
             'ContentBody': [f'<img src="/media/{loc.dataset.image.name}" class="img-fluid" alt="{loc.name} image" height="150" width="200">'],
             'ContentFooter': [f'{loc.dataset.n_plots} plots'],
-            'hint': [loc.name],
+            'hint': [str(loc.dataset)],
         }
         data.append(placemark)
 
