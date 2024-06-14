@@ -296,7 +296,7 @@ def species_analysis_view(request):
             ('vascular', 'Vascular plants'),
             ('unknown', 'Unknown'),
         )
-        return ChoiceFieldForm(None, field='group', choices=choices, widget=forms.RadioSelect)
+        return ChoiceFieldForm(data, field='group', choices=choices, widget=forms.RadioSelect)
 
     if request.method == 'POST':
         if 'group' in request.POST:
@@ -315,10 +315,10 @@ def species_analysis_view(request):
 def species_analysis_result_view(request):
     params = request.session.get('species_analysis')
     field = f'species_{params['group']}'
-    datasets = Dataset.objects.all()
+    datasets = Dataset.objects.all().order_by('number')
     result = [
         {
-            'name': i.title,
+            'name': str(i),
             'count': getattr(i, field),
             'percent': round(100 * getattr(i, field) / i.species_total) if i.species_total != 0 else 0,
             'url': i.get_absolute_url(),
