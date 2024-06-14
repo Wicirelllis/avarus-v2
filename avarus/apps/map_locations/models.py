@@ -13,5 +13,5 @@ class MapLocation(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ['name']
         verbose_name = 'Location'

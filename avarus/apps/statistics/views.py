@@ -315,7 +315,7 @@ def species_analysis_view(request):
 def species_analysis_result_view(request):
     params = request.session.get('species_analysis')
     field = f'species_{params['group']}'
-    datasets = Dataset.objects.all().order_by('number')
+    datasets = Dataset.objects.all()
     result = [
         {
             'name': str(i),

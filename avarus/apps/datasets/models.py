@@ -138,6 +138,7 @@ class Dataset(models.Model):
 
     class Meta:
         verbose_name = 'Dataset'
+        ordering = ['number']
 
 
 ACCESS_STATUS = (
