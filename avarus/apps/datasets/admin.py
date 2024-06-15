@@ -54,6 +54,7 @@ class DatasetAdmin(admin.ModelAdmin):
             },
         ),
     ]
+    list_display = ['__str__', 'status', 'in_preparation']
 
 admin.site.register(Dataset, DatasetAdmin)
 admin.site.register(DatasetRequest)
