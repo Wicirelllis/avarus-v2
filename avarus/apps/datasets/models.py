@@ -100,41 +100,6 @@ class Dataset(models.Model):
 
     def get_absolute_url(self):
         return reverse('dataset-detail', args=[str(self.id)])
-    
-    def save(self, *args, **kwargs):
-        ''' Overrie save method to automatically generate description of dataset '''
-        super(Dataset, self).save(*args, **kwargs)
-        fields = [
-            'n_plots',
-            'disturban',
-            'position',
-            'ecotope',
-            'phytocoenosis',
-            'phytocoenosis_cover',
-            'soil_text',
-            'year',
-            'coverscale',
-            'region',
-            'location',
-            'subzone',
-            'mosses',
-            'liverworts',
-            'liches',
-            'vascular',
-            'cryptogam',
-            'latitude',
-            'longitude',
-            'species_total',
-            'species_liches',
-            'species_liverworts',
-            'species_mosses',
-            'species_vascular',
-            'species_unknown',
-        ]
-        if not self.in_preparation:
-            ParseDataset(self).fill_fields(fields)
-        super(Dataset, self).save(*args, **kwargs)
-
 
     class Meta:
         verbose_name = 'Dataset'

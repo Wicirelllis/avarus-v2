@@ -35,9 +35,8 @@ class ParseDataset:
     def fill_fields(self, fields: list[str]):
         ''' Fill dataset's attributes '''
         for field in fields:
-            if not getattr(self.dataset, field):
-                with suppress(Exception):
-                    setattr(self.dataset, field, getattr(self, f'_get_{field}')())
+            with suppress(Exception):
+                setattr(self.dataset, field, getattr(self, f'_get_{field}')())
 
     def _fix_header(self):
         ''' Rename column names for consistency '''
