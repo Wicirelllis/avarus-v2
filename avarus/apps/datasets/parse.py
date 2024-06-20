@@ -286,16 +286,16 @@ class ParseDataset:
         return '; '.join(_translate(val_counts, table).keys())
 
     def _get_mosses(self):
-        val_counts = _get_val_counts(self.df, 'MOSS_IDENT')
-        return str(val_counts)
+        val = self.df['MOSS_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * val:.0f} %'
 
     def _get_liverworts(self):
-        val_counts = _get_val_counts(self.df, 'LIV_IDENT')
-        return str(val_counts)
+        val = self.df['LIV_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * val:.0f} %'
 
     def _get_liches(self):
-        val_counts = _get_val_counts(self.df, 'LICH_IDENT')
-        return str(val_counts)
+        val = self.df['LICH_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * val:.0f} %'
 
     def _get_vascular(self):
         table = {
@@ -306,8 +306,9 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        val_counts = _get_val_counts(self.df, 'FLOR_QUAL')
-        return str(_translate(val_counts, table))
+        vals = self.df['FLOR_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        d = _translate(vals, table)
+        return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in d.items()))
 
     def _get_cryptogam(self):
         table = {
@@ -318,8 +319,9 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        val_counts = _get_val_counts(self.df, 'CRYP_QUAL')
-        return str(_translate(val_counts, table))
+        vals = self.df['CRYP_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        d = _translate(vals, table)
+        return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in d.items()))
 
     def _get_latitude(self):
         data = self.df['LATITUDE'].astype(float)
