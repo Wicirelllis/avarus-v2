@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-10 16:20+0000\n"
+"POT-Creation-Date: 2024-06-20 10:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,11 +48,11 @@ msgstr "Должность"
 msgid "photo"
 msgstr "Фото"
 
-#: avarus/settings.py:126
+#: avarus/settings.py:127
 msgid "EN"
 msgstr ""
 
-#: avarus/settings.py:127
+#: avarus/settings.py:128
 msgid "RU"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 "Великое видение без великих людей не имеет значения. <br>Давайте работать "
 "вместе."
 
-#: templates/about.html:93 templates/datasets/dataset_detail.html:86
+#: templates/about.html:93 templates/datasets/dataset_detail.html:89
 msgid "Submit"
 msgstr "Отправить"
 
@@ -187,7 +187,7 @@ msgid "Datasets"
 msgstr "Датасеты"
 
 #: templates/authors/author_detail.html:30 templates/base.html:55
-#: templates/datasets/dataset_detail.html:121
+#: templates/datasets/dataset_detail.html:125
 #: templates/publications/publications.html:15
 msgid "Publications"
 msgstr "Публикации"
@@ -246,63 +246,67 @@ msgstr "Регион"
 msgid "Number of plots"
 msgstr "Количество "
 
-#: templates/datasets/dataset_detail.html:44
-#: templates/datasets/dataset_detail.html:50
-#: templates/datasets/dataset_detail.html:72
-#: templates/datasets/dataset_detail.html:78
+#: templates/datasets/dataset_detail.html:43
+msgid "Dataset is in preparation. It will be available in the future."
+msgstr "Датасет в процессе подготовки. Он будет доступен в будущем."
+
+#: templates/datasets/dataset_detail.html:47
+#: templates/datasets/dataset_detail.html:53
+#: templates/datasets/dataset_detail.html:75
+#: templates/datasets/dataset_detail.html:81
 msgid "Request access"
 msgstr "Запросить доступ"
 
-#: templates/datasets/dataset_detail.html:55
+#: templates/datasets/dataset_detail.html:58
 msgid "Please"
 msgstr "Пожалуйста"
 
-#: templates/datasets/dataset_detail.html:55
+#: templates/datasets/dataset_detail.html:58
 #: templates/registration/login.html:22 templates/registration/register.html:25
 msgid "Log In"
 msgstr "Войти"
 
-#: templates/datasets/dataset_detail.html:58
+#: templates/datasets/dataset_detail.html:61
 #: templates/registration/login.html:25
 msgid "Don't have an account?"
 msgstr "Нет аккаунта?"
 
-#: templates/datasets/dataset_detail.html:58
+#: templates/datasets/dataset_detail.html:61
 #: templates/registration/login.html:25 templates/registration/register.html:22
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
-#: templates/datasets/dataset_detail.html:66
+#: templates/datasets/dataset_detail.html:69
 #: templates/statistics/filter_env_result.html:20
 #: templates/statistics/filter_spp_result.html:20
 msgid "Download"
 msgstr "Скачать"
 
-#: templates/datasets/dataset_detail.html:68
+#: templates/datasets/dataset_detail.html:71
 msgid "Dataset is currently unavailable."
 msgstr "Датасет недоступен"
 
-#: templates/datasets/dataset_detail.html:102
+#: templates/datasets/dataset_detail.html:106
 msgid "General data"
 msgstr "Общие данные"
 
-#: templates/datasets/dataset_detail.html:105
+#: templates/datasets/dataset_detail.html:109
 msgid "Relief"
 msgstr "Рельеф"
 
-#: templates/datasets/dataset_detail.html:108
+#: templates/datasets/dataset_detail.html:112
 msgid "Soil texture"
 msgstr "Структура почвы"
 
-#: templates/datasets/dataset_detail.html:111
+#: templates/datasets/dataset_detail.html:115
 msgid "Ecotope data"
 msgstr "Характеристики местообитаний"
 
-#: templates/datasets/dataset_detail.html:114
+#: templates/datasets/dataset_detail.html:118
 msgid "Phytocoenosis data"
 msgstr "Характеристики растительности"
 
-#: templates/datasets/dataset_detail.html:118
+#: templates/datasets/dataset_detail.html:122
 msgid "Disturbance"
 msgstr "Нарушения"
 
@@ -388,8 +392,8 @@ msgid "MIEM HSE"
 msgstr "МИЭМ НИУ ВШЭ"
 
 #: templates/home.html:33
-msgid "Supported by"
-msgstr "При поддержке"
+msgid "Supported by RFBR 18-04-01010"
+msgstr "При поддержке РФФИ 18-04-01010"
 
 #: templates/publications/publication_detail.html:43
 msgid "Related datasets"
@@ -657,6 +661,9 @@ msgstr "Видовой анализ (группа)"
 #: templates/statistics/statistics.html:76
 msgid "Species analysis (by dataset)"
 msgstr "Видовой анализ (датасет)"
+
+#~ msgid "Supported by"
+#~ msgstr "При поддержке"
 
 #~ msgid "name"
 #~ msgstr "имя"
