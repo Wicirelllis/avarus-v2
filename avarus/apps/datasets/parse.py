@@ -66,10 +66,17 @@ def _calc_completeness(df: pd.DataFrame, fields: list[str]) -> dict:
 
 def _translate(data: list | dict, table: dict) -> list | dict:
     ''' Replace elements of the list using translation table '''
+    def _replace(s: str) -> str:
+        if '/' in s:
+            l = s.split('/')
+            if all((i in table for i in l)):
+                return ' / '.join((table[i] for i in l))
+        return table.get(s, s)
+
     if isinstance(data, list):
-        return [table.get(i, i) for i in data]
+        return [_replace(i) for i in data]
     elif isinstance(data, dict):
-        return {table.get(k, k): v for k, v in data.items()}
+        return {_replace(k): v for k, v in data.items()}
 
 
 class ParseDataset:
