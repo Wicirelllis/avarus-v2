@@ -8,14 +8,61 @@ from apps.datasets import species
 from apps.datasets.utils import read_env, read_spp
 from django.utils.translation import gettext_lazy as _
 
+from typing import Any
 
-def _get_val_counts(df: pd.DataFrame, field: str | list[str]) -> dict:
+
+def _format_data(data: dict[str, float], print_vals: bool = True) -> str:
+    if len(data) > 1:
+        if print_vals:
+            return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in data.items()))
+        else:
+            return ', '.join(data)
+    else:
+        return next(iter(data))
+
+
+def _dict_zfill_keys(data: dict[str, Any], width: int) -> dict:
+    ''' Pad str keys with zeros '''
+    return {str(k).zfill(width): v for k, v in data.items()}
+
+def _dict_sort_by_vals(data: dict) -> dict:
+    ''' Sort dict by values '''
+    return dict(sorted(data.items(), key=lambda x: x[1]))
+
+
+def _format_value_counts(df: pd.DataFrame, field: str, trans_table: dict = None, percent: bool = True, sort: bool = False) -> str:
+    """
+    Format string with 2 most common values
+    
+    :param df: datafram
+    :param field: field
+    :param trans_table: translatation table
+    :param percent: display frequencies
+    :param sort: sort by frequencies whne True
+
+    Example: 'Subzone B (25 %), Subzone D (19 %)'
+    """
+    vals = df[field].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+    if trans_table is not None:
+        vals = _translate(vals, trans_table)
+    if sort:
+        vals = dict(sorted(vals.items(), key=lambda x: x[1]))
+    if percent:
+        return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in vals.items()))
+    else:
+        return ', '.join((f'{k}' for k in vals))
+
+def _get_val_counts(df: pd.DataFrame, field: str) -> dict:
     ''' Return a dict containing counts of unique values '''
     return df[field].fillna('No data').value_counts(dropna=False).to_dict()
 
-def _calc_completeness(df: pd.DataFrame) -> dict:
+def _calc_completeness(df: pd.DataFrame, fields: list[str]) -> dict:
     ''' Calculate copleteness (percent of cell with data) for each column of dataframe '''
-    return (100 * df.notna().sum() / df.shape[0]).round().astype(int).to_dict()
+    res = (100 * df.filter(fields).notna().sum() / df.shape[0]).round().astype(int).to_dict()
+    diff = set(fields) - set(res)
+    if diff:
+        res.update({k: 0 for k in diff})
+    return res
 
 def _translate(data: list | dict, table: dict) -> list | dict:
     ''' Replace elements of the list using translation table '''
@@ -107,7 +154,7 @@ class ParseDataset:
             'SOIL_TEXT',
             'SOIL_PH',
         ]
-        data = _calc_completeness(self.df[fields])
+        data = _calc_completeness(self.df, fields)
         table = {
             'ELEVATION': 'Altitude, m',
             'SLOPE': 'Slope, degree',
@@ -135,7 +182,7 @@ class ParseDataset:
             'HERB_HT',
             'MOSS_HT',
         ]
-        data = _calc_completeness(self.df[fields])
+        data = _calc_completeness(self.df, fields)
         table = {
             'MEAN_HT': 'Mean canopy height',
             'TREE_HT': 'Mean tree height',
@@ -171,7 +218,7 @@ class ParseDataset:
             'COV_LITTER',
             'COV_TOTAL',
         ]
-        data = _calc_completeness(self.df[fields])
+        data = _calc_completeness(self.df, fields)
         table = {
             'COV_TREES': 'Tree layer',
             'COV_SHRUBS': 'Shrub layer',
@@ -228,9 +275,11 @@ class ParseDataset:
             '98': 'Numbers (<65025)',
             '99': 'Numbers (<24000)',
         }
-        vals = self.df['COVERSCALE'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
-        vals = [str(s).zfill(2) for s in vals]
-        return '; '.join(_translate(vals, table))
+        # return _format_value_counts(self.df, 'COVERSCALE', table, False, True)
+        data = self.df['COVERSCALE'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        data = _dict_zfill_keys(data, 2)
+        data = _translate(data, table)
+        return _format_data(data, print_vals=False)
 
     def _get_region(self):
         table = {
@@ -262,15 +311,17 @@ class ParseDataset:
             '025': 'Canadian Arctic Archipelago',
             '026': 'Mainland Northwest Territories, Canada',
         }
-        vals = self.df['REGION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
-        vals = [str(s).zfill(3) for s in vals]
-        return '; '.join(_translate(vals, table))
+        # return _format_value_counts(self.df, 'REGION', table, False, True)
+        data = self.df['REGION'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        data = _dict_zfill_keys(data, 3)
+        data = _translate(data, table)
+        return _format_data(data, print_vals=False)
 
     def _get_location(self):
-        vals = self.df['LOCATION'].fillna('No data').value_counts(dropna=False).nlargest(3).keys().to_list()
-        vals = [str(s).zfill(3) for s in vals]
-        return '; '.join(vals)
-    
+        # return _format_value_counts(self.df, 'LOCATION', None, False, True)
+        data = self.df['LOCATION'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        return _format_data(data, print_vals=False)
+
     def _get_subzone(self):
         table = {
             'A': 'Subzone A',
@@ -282,20 +333,22 @@ class ParseDataset:
             'FT': 'Forest-Tundra Transition',
             'BO': 'Boreal',
         }
-        val_counts = _get_val_counts(self.df, 'SUBZONE')
-        return '; '.join(_translate(val_counts, table).keys())
+        # return _format_value_counts(self.df, 'SUBZONE', table, True, True)
+        data = self.df['SUBZONE'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        data = _translate(data, table)
+        return _format_data(data, print_vals=True)
 
     def _get_mosses(self):
-        val = self.df['MOSS_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
-        return f'{100 * val:.0f} %'
+        data = self.df['MOSS_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * data:.0f} %'
 
     def _get_liverworts(self):
-        val = self.df['LIV_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
-        return f'{100 * val:.0f} %'
+        data = self.df['LIV_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * data:.0f} %'
 
     def _get_liches(self):
-        val = self.df['LICH_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
-        return f'{100 * val:.0f} %'
+        data = self.df['LICH_IDENT'].value_counts(normalize=True, dropna=False).get('Y', 0)
+        return f'{100 * data:.0f} %'
 
     def _get_vascular(self):
         table = {
@@ -306,9 +359,9 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        vals = self.df['FLOR_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
-        d = _translate(vals, table)
-        return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in d.items()))
+        data = self.df['FLOR_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        data = _translate(data, table)
+        return _format_data(data, print_vals=True)
 
     def _get_cryptogam(self):
         table = {
@@ -319,9 +372,9 @@ class ParseDataset:
             5: 'Moderate and incomplete',
             6: 'Low',
         }
-        vals = self.df['CRYP_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
-        d = _translate(vals, table)
-        return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in d.items()))
+        data = self.df['CRYP_QUAL'].fillna('No data').value_counts(normalize=True, dropna=False).nlargest(2).to_dict()
+        data = _translate(data, table)
+        return _format_data(data, print_vals=True)
 
     def _get_latitude(self):
         data = self.df['LATITUDE'].astype(float)
