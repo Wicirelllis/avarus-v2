@@ -34,6 +34,9 @@
         options: {
             scales: {
                 y: {
+                    display: chart_type == 'pie' ? false : true,
+                    suggestedMin: 0,
+                    suggestedMax: 100,
                     beginAtZero: true
                 }
             }
