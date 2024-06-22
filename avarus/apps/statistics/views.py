@@ -294,7 +294,6 @@ def species_analysis_view(request):
             ('liverworts', 'Liverworts'),
             ('mosses', 'Mosses'),
             ('vascular', 'Vascular plants'),
-            ('unknown', 'Unknown'),
         )
         return ChoiceFieldForm(data, field='group', choices=choices, widget=forms.RadioSelect)
 
