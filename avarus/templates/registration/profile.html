@@ -79,11 +79,17 @@
 			<div class="tab-pane fade" id="v-pills-available-datasets" role="tabpanel" aria-labelledby="v-pills-available-datasets-tab" tabindex="0">
 				<ul class="list-group">
 					<li class="list-group-item d-flex justify-content-between align-items-center">
-						<div class="col p-2 px-5">
+						<div class="col p-2 px-5 text-center">
 							Dataset
 						</div>
-						<div class="col p-2 px-5">
-							Download
+						<div class="col p-2 px-5 text-center">
+							Habitat
+						</div>
+						<div class="col p-2 px-5 text-center">
+							Species
+						</div>
+						<div class="col p-2 px-5 text-center">
+							Additional data
 						</div>
 					</li>
 					{% for dataset in available_datasets %}
@@ -93,12 +99,26 @@
 									{{ dataset }}
 								</a>
 							</div>
-							<div class="col p-2">
-								{% if dataset.download_url %}
-									<a href="{{ dataset.download_url }}">
-										Link
-									</a>
-								{% endif %}
+							<div class="col p-2 text-center">
+								<a class="btn btn-primary col mx-3 my-1" href="/media/{{ dataset.env }}" role="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+									</svg>
+								</a>
+							</div>
+							<div class="col p-2 text-center">
+								<a class="btn btn-primary col mx-3 my-1" href="/media/{{ dataset.spp }}" role="button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+									</svg>
+								</a>
+							</div>
+							<div class="col p-2 text-center">
+								<a class="btn btn-primary {% if not dataset.download_url %} disabled {% endif %}" href="{{ dataset.download_url }}" role="button">
+									Link
+								</a>
 							</div>
 						</li>
 					{% endfor %}
