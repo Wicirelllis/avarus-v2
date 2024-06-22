@@ -13,9 +13,9 @@ def _read_file(file, *args, **kwargs):
         filename = file.path
 
     if filename.endswith('xlsx'):
-        return pd.read_excel(file, *args, **kwargs)
+        return pd.read_excel(file, *args, **kwargs).dropna(how='all')
     if filename.endswith('csv'):
-        return pd.read_csv(file, encoding='cp1252', encoding_errors='ignore', *args, **kwargs)
+        return pd.read_csv(file, encoding='cp1252', encoding_errors='ignore', *args, **kwargs).dropna(how='all')
 
 
 def read_env(path: str) -> pd.DataFrame:

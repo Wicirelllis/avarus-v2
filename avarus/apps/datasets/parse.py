@@ -14,9 +14,9 @@ from typing import Any
 def _format_data(data: dict[str, float], print_vals: bool = True) -> str:
     if len(data) > 1:
         if print_vals:
-            return ', '.join((f'{k} ({100 * v:.0f} %)' for k, v in data.items()))
+            return '; '.join((f'{k} ({100 * v:.0f} %)' for k, v in data.items()))
         else:
-            return ', '.join(data)
+            return '; '.join(data)
     else:
         return next(iter(data))
 
@@ -384,14 +384,22 @@ class ParseDataset:
         return _format_data(data, print_vals=True)
 
     def _get_latitude(self):
-        data = self.df['LATITUDE'].astype(float)
-        data = data[abs(data) > 0.001]
+        data = self.df['LATITUDE'].dropna().astype(float)
+        if len(data) == 0:
+            return
         return (np.max(data) + np.min(data)) / 2.
 
     def _get_longitude(self):
-        data = self.df['LONGITUDE'].astype(float)
-        data = data[abs(data) > 0.001]
-        return (np.max(data) + np.min(data)) / 2.
+        data = self.df['LONGITUDE'].dropna().astype(float)
+        if len(data) == 0:
+            return
+        data = data.apply(lambda x: x + 360 if x < 0 else x)
+        res = (np.max(data) + np.min(data)) / 2.
+        # make sure res in (-180; 180]
+        res %= 360
+        if res > 180:
+            res -= 360
+        return res
 
     def _get_species_total(self):
         return self.spp['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].count()
