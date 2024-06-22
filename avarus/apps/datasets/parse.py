@@ -69,8 +69,8 @@ def _translate(data: list | dict, table: dict) -> list | dict:
     def _replace(s: str) -> str:
         if '/' in s:
             l = s.split('/')
-            if all((i in table for i in l)):
-                return ' / '.join((table[i] for i in l))
+            if all((i.strip() in table for i in l)):
+                return ' / '.join((table[i.strip()] for i in l))
         return table.get(s, s)
 
     if isinstance(data, list):
@@ -102,20 +102,27 @@ class ParseDataset:
 
     # chart data fields
     def _get_disturban(self):
-        data = _get_val_counts(self.df, 'DISTURBAN')
-        table = {
+        # data = _get_val_counts(self.df, 'DISTURBAN')
+        replace_table = {
+            'DIST': 'DIS',
+        }
+        trans_table = {
             'DIS': 'Disturbed',
             'NAT': 'Natural',
         }
+        data = self.df['DISTURBAN'].str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
         return {
             'title': 'Disturbance',
-            'labels': _translate(list(data.keys()), table),
+            'labels': _translate(list(data.keys()), trans_table),
             'data': list(data.values()),
         }
 
     def _get_position(self):
-        data = _get_val_counts(self.df, 'POSITION')
-        table = {
+        # data = _get_val_counts(self.df, 'POSITION')
+        replace_table = {
+            'RIP_ZN': 'RIPZN',
+        }
+        trans_table = {
             'EL_PLN': 'Flat elevated plain',
             'CRST': 'Hill crest',
             'SHLD': 'Shoulder',
@@ -125,15 +132,16 @@ class ParseDataset:
             'RIPZN': 'Riparian zone',
             'LAKE': 'Lake or pond',
         }
+        data = self.df['POSITION'].str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
         return {
             'title': 'Relief chart',
-            'labels': _translate(list(data.keys()), table),
+            'labels': _translate(list(data.keys()), trans_table),
             'data': list(data.values()),
         }
 
     def _get_soil_text(self):
-        data = _get_val_counts(self.df, 'SOIL_TEXT')
-        table = {
+        # data = _get_val_counts(self.df, 'SOIL_TEXT')
+        trans_table = {
             'GRV': 'Gravel or coarser',
             'SND': 'Sand',
             'SLT': 'Silt',
@@ -141,9 +149,10 @@ class ParseDataset:
             'LOM': 'Loam',
             'ORG': 'Organic (if no mineral soil)',
         }
+        data = self.df['SOIL_TEXT'].str.strip().fillna('No data').value_counts(dropna=False).to_dict()
         return {
             'title': 'Soil chart',
-            'labels': _translate(list(data.keys()), table),
+            'labels': _translate(list(data.keys()), trans_table),
             'data': list(data.values()),
         }
 
