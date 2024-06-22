@@ -4,6 +4,7 @@ DTYPE = {
     'COVERSCALE': str,
     'SOIL_TEXT': str,
     'DISTURBAN': str,
+    'POSITION': str,
 }
 
 
