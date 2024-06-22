@@ -67,10 +67,11 @@ def _calc_completeness(df: pd.DataFrame, fields: list[str]) -> dict:
 def _translate(data: list | dict, table: dict) -> list | dict:
     ''' Replace elements of the list using translation table '''
     def _replace(s: str) -> str:
-        if '/' in s:
-            l = s.split('/')
-            if all((i.strip() in table for i in l)):
-                return ' / '.join((table[i.strip()] for i in l))
+        for delim in ('/', ',', '-'):
+            if delim in s:
+                l = s.split(delim)
+                if all((i.strip() in table for i in l)):
+                    return ' / '.join((table[i.strip()] for i in l))
         return table.get(s, s)
 
     if isinstance(data, list):
@@ -110,7 +111,7 @@ class ParseDataset:
             'DIS': 'Disturbed',
             'NAT': 'Natural',
         }
-        data = self.df['DISTURBAN'].str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
+        data = self.df['DISTURBAN'].str.upper().str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
         return {
             'title': 'Disturbance',
             'labels': _translate(list(data.keys()), trans_table),
@@ -132,7 +133,7 @@ class ParseDataset:
             'RIPZN': 'Riparian zone',
             'LAKE': 'Lake or pond',
         }
-        data = self.df['POSITION'].str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
+        data = self.df['POSITION'].str.upper().str.strip().fillna('No data').replace(replace_table).value_counts(dropna=False).to_dict()
         return {
             'title': 'Relief chart',
             'labels': _translate(list(data.keys()), trans_table),
@@ -149,7 +150,7 @@ class ParseDataset:
             'LOM': 'Loam',
             'ORG': 'Organic (if no mineral soil)',
         }
-        data = self.df['SOIL_TEXT'].str.strip().fillna('No data').value_counts(dropna=False).to_dict()
+        data = self.df['SOIL_TEXT'].str.upper().str.strip().fillna('No data').value_counts(dropna=False).to_dict()
         return {
             'title': 'Soil chart',
             'labels': _translate(list(data.keys()), trans_table),

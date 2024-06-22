@@ -9,7 +9,7 @@ from django.db.models.query import QuerySet
 
 def _normalize(s: str) -> str:
     ''' Pad numbers in string with zeros so alphabetical sort will work as natural sort '''
-    return ''.join([i.zfill(8) for i in re.split(r'([0-9]+)', s)])
+    return ''.join([i.zfill(8) if i.isdecimal() else i for i in re.split(r'([0-9]+)', s)])
 
 
 def get_available_datasets(user):
