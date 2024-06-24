@@ -26,11 +26,10 @@ from avarus import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
-
 urlpatterns += i18n_patterns(
-    path('i18n/', include('django.conf.urls.i18n')),
     path('', views.HomeView, name='home'),
     path('about/', views.AboutView, name='about'),
     path('services/', views.ServicesView, name='services'),
