@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>', views.DatasetDetailView.as_view(), name='dataset-detail'),
     path('access-request', views.DatasetRequestFormView.as_view(), name='dataset-request-form'),
     path('access-request-complete', TemplateView.as_view(template_name='datasets/dataset_request_done.html'), name='dataset-request-done'),
+    path('<int:pk>/download/<str:entity>', views.download_view, name='dataset-download'),
 ]

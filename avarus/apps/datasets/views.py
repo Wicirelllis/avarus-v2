@@ -1,10 +1,11 @@
 from apps.datasets.forms import DatasetRequestForm
+from django.conf import settings
+from django.core.mail import send_mail
+from django.http import FileResponse, Http404, HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.views import generic
-from django.core.mail import send_mail
 
 from .models import Dataset
-from django.conf import settings
 
 
 def DatasetsView(request):
@@ -55,3 +56,17 @@ class DatasetRequestFormView(generic.View):
 
     def get(self, request):
         return redirect('/')
+
+
+def download_view(request, pk: int, entity: str):
+    dataset = Dataset.objects.get(pk=pk)
+    if entity == 'env':
+        file = dataset.env
+    elif entity == 'spp':
+        file = dataset.spp
+    else:
+        raise Http404()
+    if dataset.status == 'pu' or request.user in dataset.available_to.all():
+        return FileResponse(file, as_attachment=True)
+    else:
+        return HttpResponseForbidden('You may not download requested file.')
