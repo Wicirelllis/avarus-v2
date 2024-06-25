@@ -12,7 +12,7 @@
             {% translate title %}
         </h3>
         <div class="card-body">
-            <form method="post" onsubmit="nonEmptyFormValiator();">
+            <form id="form" method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 <div class="d-flex justify-content-between">
@@ -37,13 +37,32 @@
 
 
 <script type="text/javascript">
-    function nonEmptyFormValiator () {
+    const form = document.getElementById("form");
+    const selectAllCheckbox = document.getElementById('id_rows_0');
+
+    selectAllCheckbox.addEventListener("change", (event) => {
+        // allow 'select all' to (un-)check all checkboxes on the page
+        var checkboxes = document.querySelectorAll("input[type=checkbox]");
+        if (event.currentTarget.checked) {
+            for (var i = 0; i < checkboxes.length; i++){
+                checkboxes[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < checkboxes.length; i++){
+                checkboxes[i].checked = false;
+            }
+        }
+    });
+    form.addEventListener("submit", () => {
+        // verify that at least one option is selected
         count = document.querySelectorAll("input.form-check-input:checked").length;
         if (count == 0) {
             event.preventDefault();
             const liveToast = document.getElementById('live-toast');
             const toastBootstrap = new bootstrap.Toast(liveToast);
             toastBootstrap.show();
+        } else{
+            selectAllCheckbox.checked = false;
         }
-    }
+    });
 </script>

@@ -189,7 +189,7 @@ def filter_spp_view(request):
     def _make_form_rows(data = None):
         id = request.session['filter_spp']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices = make_choices(dataset.get_spp_rows())
+        choices = make_choices(dataset.get_spp_rows(), select_all=True)
         return MultipleChoiceFieldForm(data, field='rows', choices=choices, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -212,13 +212,14 @@ def filter_spp_view(request):
         request.session['filter_spp'] = {}
         form_dataset = _make_form_dataset()
         return render(request, 'statistics/filter_spp.html', {'form': form_dataset})
-    
+
 def filter_spp_result_view(request):
     params = request.session.get('filter_spp')
     df = get_spp_df_by_id(params['dataset_id'])
     rows: list[str] = params['rows']
 
     result = df.loc[df['PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)'].isin(rows)]
+
     file_url = '/media/tmp/filter_spp.xlsx'
     result.to_excel(f'/avarus{file_url}', index=False)
     return render(request, 'statistics/filter_spp_result.html', {'result': result, 'file_url': file_url})

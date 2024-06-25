@@ -19,13 +19,17 @@ def get_available_datasets(user):
     )
 
 
-def make_choices(iter: QuerySet | Iterable[str], sort: bool = True) -> tuple[str, str]:
+def make_choices(iter: QuerySet | Iterable[str], sort: bool = True, select_all: bool = False) -> tuple[str, str]:
     ''' Create tuple of pairs of choices for form. '''
     if isinstance(iter, QuerySet):
-        result = tuple((str(i.pk), str(i)) for i in iter)
+        result = [(str(i.pk), str(i)) for i in iter]
     else:
-        result = tuple((str(i), str(i)) for i in iter)
-    return sorted(result, key=lambda x: _normalize(x[1])) if sort else result
+        result = [(str(i), str(i)) for i in iter]
+    if sort:
+        result = sorted(result, key=lambda x: _normalize(x[1]))
+    if select_all:
+        result = [('SELECT_ALL', 'Select all')] + result
+    return result
 
 
 def get_spp_df_by_id(id: int | str) -> pd.DataFrame:
