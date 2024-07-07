@@ -71,6 +71,12 @@ class Dataset(models.Model):
 
     def get_spp_cols(self, drop_na: bool = False, numeric: bool = False):
         df = read_spp(self.spp.path)
+        drop_cols = [
+            'PASL TAXON SCIENTIFIC NAME NO AUTHOR(S)',
+            'PASL TAXON SCIENTIFIC NAME WITH AUTHOR(S)',
+            'DATASET TAXON'
+        ]
+        df = df.drop(columns=drop_cols, errors='ignore')
         if drop_na:
             df.dropna(axis=1, how='all', inplace=True)
         if numeric:

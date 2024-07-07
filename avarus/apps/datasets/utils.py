@@ -47,4 +47,4 @@ def read_spp(path: str) -> pd.DataFrame:
                 header_vals = df[df.isin(["AUTHOR PLOT NUMBER"]).any(axis=1)].squeeze()
                 header.fillna(header_vals, inplace=True)
             header = _rename_duplicates(header)
-            return _read_file(path, skiprows=row_idx+1, names=header, dtype=DTYPE).dropna(how='all').fillna(0).convert_dtypes()
+            return _read_file(path, skiprows=row_idx+1, names=header, dtype=str).dropna(how='all').fillna(0).convert_dtypes()

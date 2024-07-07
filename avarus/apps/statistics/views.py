@@ -146,7 +146,7 @@ def cluster_analysis_view(request):
     def _make_form_cols(data = None):
         id = request.session['cluster_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = make_choices(dataset.get_spp_cols())
+        choices_data = make_choices(dataset.get_spp_cols(), select_all=True)
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':

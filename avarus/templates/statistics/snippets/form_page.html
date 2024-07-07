@@ -38,10 +38,10 @@
 
 <script type="text/javascript">
     const form = document.getElementById("form");
-    const selectAllCheckbox = document.getElementById('id_rows_0');
+    const selectAllCheckbox = document.querySelector("input[value=SELECT_ALL]");
 
     selectAllCheckbox.addEventListener("change", (event) => {
-        // allow 'select all' to (un-)check all checkboxes on the page
+        // allow "select all" to (un-)check all checkboxes on the page
         var checkboxes = document.querySelectorAll("input[type=checkbox]");
         if (event.currentTarget.checked) {
             for (var i = 0; i < checkboxes.length; i++){
@@ -58,7 +58,7 @@
         count = document.querySelectorAll("input.form-check-input:checked").length;
         if (count == 0) {
             event.preventDefault();
-            const liveToast = document.getElementById('live-toast');
+            const liveToast = document.getElementById("live-toast");
             const toastBootstrap = new bootstrap.Toast(liveToast);
             toastBootstrap.show();
         } else{
