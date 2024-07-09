@@ -19,7 +19,17 @@
             {% translate "Factor analysis" %}
         </h3>
         <div class="card-body">
-            {% translate "Coming soon." %}
+            <table class="table">
+                <tbody>
+                    {% for row_data in result %}
+                        <tr>
+                            {% for i in row_data %}
+                                <td>{{ i }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
         </div>
     </div>
 </div>

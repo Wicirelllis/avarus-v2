@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 from pca import pca
 from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.stats import pearsonr
+from sklearn.decomposition import FactorAnalysis
 from sklearn.metrics import jaccard_score, pairwise_distances
 
 
@@ -17,7 +18,11 @@ def pca_analysis(df: pd.DataFrame, cols: tuple[str, str]):
     fig.savefig(f'/avarus{file_url}')
 
 def factor_analysis(df: pd.DataFrame, cols: tuple[str, str]):
-    ...
+    data = df[cols].apply(pd.to_numeric, errors='coerce').dropna()
+    fa = FactorAnalysis(n_components=2, random_state=0)
+    fa.fit(data)
+    components = fa.components_.T
+    return components
 
 def cluster_analysis(df: pd.DataFrame, cols: tuple[str, str]):
     data = df[cols].eq('0').astype(int).T

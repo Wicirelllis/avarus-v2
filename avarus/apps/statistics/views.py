@@ -104,7 +104,7 @@ def factor_analysis_view(request):
     def _make_form_cols(data = None):
         id = request.session['factor_analysis']['dataset_id']
         dataset = Dataset.objects.filter(id=id).first()
-        choices_data = make_choices(dataset.get_spp_cols())
+        choices_data = make_choices(dataset.get_spp_cols(), select_all=True)
         return MultipleChoiceFieldForm(data, field='cols', choices=choices_data, widget=forms.CheckboxSelectMultiple)
 
     if request.method == 'POST':
@@ -132,7 +132,9 @@ def factor_analysis_result_view(request):
     params = request.session.get('factor_analysis')
     df = get_spp_df_by_id(params['dataset_id'])
     cols = params['cols']
-    result = factor_analysis(df, cols)
+    result_data = factor_analysis(df, cols)
+
+    result = [[col, *data] for col, data in zip(cols, result_data)]
     return render(request, 'statistics/factor_analysis_result.html', {'result': result})
 
 
