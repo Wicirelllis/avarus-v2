@@ -16,7 +16,7 @@
 ```bash
 docker compose up -d
 ```
-- Выплнить Django-миграции
+- Выполнить Django-миграции
 ```bash
 docker exec -it django19001-v2 python manage.py migrate
 ```
@@ -39,7 +39,7 @@ docker exec -it django19001-v2 python manage.py migrate
 ```bash
 docker compose --profile prod up -d
 ```
-- Выплнить Django-миграции
+- Выполнить Django-миграции
 ```bash
 docker exec -it django19001-v2 python manage.py migrate
 ```
