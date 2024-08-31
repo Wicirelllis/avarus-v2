@@ -4,6 +4,6 @@
 
 ## Документация
 
-* Деплой
-    * [Локально](docs/deploy/local.md)
-    * [Прод](docs/deploy/production.md)
+- [Пользователя](docs/user.md)
+- [Разработчика](docs/dev.md)
+- [Деплой](docs/deploy.md)
